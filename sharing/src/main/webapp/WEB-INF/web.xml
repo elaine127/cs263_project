@@ -20,7 +20,7 @@
  
  <welcome-file-list>
 		
-		<welcome-file>guestbook.jsp</welcome-file>
+		<welcome-file>welcome.jsp</welcome-file>
 	</welcome-file-list>
  
  
