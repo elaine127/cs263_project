@@ -1,0 +1,38 @@
+.headernav{	
+	background:#086A87;
+}
+.headernav ul {
+	clear:both;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.headernav li {
+	float: right;
+}
+
+.headernav h3 {
+	float:right;
+	display: block;
+	font-size: 1.17em;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;	
+	font-weight: bold;
+}
+
+.headernav a:link, a:visited {
+	display: block;
+	width: 140px;
+	font-size: 160%;
+	font-weight: bold;
+	color: white;	
+	text-align: center;
+	padding: 4px;
+	text-decoration: none;
+}
+
+.headernav a:hover, a:active {
+	background-color: #CCDDFF;
+}
