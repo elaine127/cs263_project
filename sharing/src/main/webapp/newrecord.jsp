@@ -90,16 +90,16 @@
 		<h3 float="right">Welcome! ${fn:escapeXml(userName)}</h3>
 		<ul>
 		<li><a href="<%=userService.createLogoutURL(request.getRequestURI())%>">SignOut</a></li>
-		<li><a href="allplans.jsp">MyHistory</a></li>
+		<li><a href="allrecords.jsp">MyHistory</a></li>
 		<li><a href="newrecord.jsp">RecordToday</a></li>
-		<li><a href="welcom.jsp">Home</a></li>
+		<li><a href="welcome.jsp">Home</a></li>
 		</ul>
 	</div>
 	<div class="formpage" style="position: relative; left: 150px;">
 		<form name="form1" id="submitform" action="/context/enqueue/newrecord" method="post">
 			<fieldset>
 				<h2>Please Enter Your record</h2>
-				<p>Name Your New Trip:<input type="text" name="planName"></p>
+				<!-- <p>Name Your New Record:<input type="text" name="RecordName"></p> -->
 				<p>Enter Your Start Date:</p>
 				<select name=YYYY onchange="YYYYMM(this.value)">
 						<option value="">Year</option>

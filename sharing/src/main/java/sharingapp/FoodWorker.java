@@ -17,23 +17,28 @@ import com.google.appengine.api.memcache.ErrorHandlers;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
-@Path("/recordworker")
-public class RecordWorker {
+@Path("/foodworker")
+public class FoodWorker {
 	@POST
-	@Path("/createrecord")
-	public void createRecord(@Context HttpServletRequest httpRequest)
+	@Path("/createfood")
+	public void createFood(@Context HttpServletRequest httpRequest)
 			throws Exception{
 
 		String userName = httpRequest.getParameter("userName");
 		String dateString = httpRequest.getParameter("date");
+		String dayString = httpRequest.getParameter("day");
+		String note = httpRequest.getParameter("note");
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Key parentKey = KeyFactory.createKey("User", userName);
 		Key dateKey = KeyFactory.createKey(parentKey, "date", dateString);
+		
 		Entity record = new Entity(dateKey);
 		
 		record.setProperty("date", dateString);
 		record.setProperty("userName", userName);
+		record.setProperty("day", dayString);
+		record.setProperty("note", note);
 		
 		datastore.put(record);
 	}

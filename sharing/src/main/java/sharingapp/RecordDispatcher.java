@@ -2,6 +2,7 @@ package sharingapp;
 
 import static com.google.appengine.api.taskqueue.TaskOptions.Builder.withUrl;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,25 +20,37 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 
-//Map this class to /ds route
 @Path("/Enqueue")
 public class RecordDispatcher {
 
 	@POST
 	@Path("/newrecord")
 	@Consumes("application/x-www-form-urlencoded")
-	public void newRecord(@FormParam("planName") String planName,
-			@FormParam("YYYY") String yyyy, @FormParam("MM") String mm,
-			@FormParam("DD") String dd, @Context HttpServletResponse response)
-			throws Exception {
+//	@FormParam("planName") String planName,,
+	public void newRecord(@FormParam("YYYY") String yyyy, @FormParam("MM") String mm,@FormParam("DD") String dd,
+			 @Context HttpServletResponse response) throws IOException
+			 {
 		UserService userService = UserServiceFactory.getUserService();
 		User userName = userService.getCurrentUser();
-		String date = yyyy + "-" + mm + "-" + dd;
+		String date = yyyy + "-" + mm;
 		Queue queue = QueueFactory.getDefaultQueue();
-		queue.add(withUrl("/context/recordworker/createrecord").param("planName", planName).param("date", date).param("userName", userName.toString()));
-		response.sendRedirect("/food.jsp?planName=" + planName + "&date="+ date);
-		
+		//.param("planName", planName)
+		queue.add(withUrl("/context/recordworker/createrecord").param("date", date).param("userName", userName.toString()));
+		response.sendRedirect("/food.jsp?date=" + date);
+			 }
+	@POST
+	@Path("/newfood")
+	@Consumes("application/x-www-form-urlencoded")
+	public void newFood(@FormParam("day") String day, @FormParam("notes") String notes,@Context HttpServletRequest request,
+			 @Context HttpServletResponse response) throws IOException{
+		UserService userService = UserServiceFactory.getUserService();
+		User userName = userService.getCurrentUser();
+		String date = request.getParameter("date");
+		Queue queue = QueueFactory.getDefaultQueue();
+		queue.add(withUrl("/context/foodworker/createfood").param("date", date).param("day", day).param("notes", notes).param("userName", userName.toString()));
+		response.sendRedirect("/food.jsp?date="+date);
 	}
+	
 
 		
 }

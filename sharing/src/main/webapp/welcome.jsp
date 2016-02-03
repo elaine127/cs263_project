@@ -24,7 +24,7 @@
 	<h3 float="left">Welcome! ${fn:escapeXml(userName)}</h3>
 	<ul>
 	<li><a href="<%=userService.createLogoutURL("welcome.jsp")%>">Sign out</a></li>
-	<li><a href="allplans.jsp">MyHistory</a></li>
+	<li><a href="allrecords.jsp">MyHistory</a></li>
 	<li><a href="newrecord.jsp">RecordToday</a></li>
 	<li><a href="welcome.jsp">Home</a></li>
 	</ul>
