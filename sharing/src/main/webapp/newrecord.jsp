@@ -75,7 +75,9 @@
 	function IsPinYear(year) {
 		return (0 == year % 4 && (year % 100 != 0 || year % 400 == 0))
 	}
+//-->
 </script>
+
 
 </head>
 
@@ -95,21 +97,34 @@
 		<li><a href="welcome.jsp">Home</a></li>
 		</ul>
 	</div>
+	
+	
 	<div class="formpage" style="position: relative; left: 150px;">
 		<form name="form1" id="submitform" action="/context/enqueue/newrecord" method="post">
 			<fieldset>
 				<h2>Please Enter Your record</h2>
 				<!-- <p>Name Your New Record:<input type="text" name="RecordName"></p> -->
 				<p>Enter Your Start Date:</p>
+				<!-- First Name: <input type="text" name="first_name">
+				<br />
+				Last Name: <input type="text" name="last_name" /> -->
+				
 				<select name=YYYY onchange="YYYYMM(this.value)">
 						<option value="">Year</option>
 				</select>
 				<select name=MM onchange="MMDD(this.value)">
 						<option value="">Month</option>
 				</select>
-				<select name=DD>
+				<select name=DD >
 						<option value="">Day</option>
-				</select>
+						<option value=1>1</option>
+						<option value=2>2</option>
+						<option value=3>3</option>
+						<option value=4>4</option>
+						<option value=5>5</option>
+						<option value=6>6</option>
+				</select> 
+				
 				<p><input type="submit" value="Continue to record details"></p>
 			</fieldset>
 		</form>

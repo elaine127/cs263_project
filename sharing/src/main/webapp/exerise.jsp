@@ -38,31 +38,31 @@
 			<div class="leftbody">
 				<div class="nav" align="center">
 				<ul>
-					<li><a style="color: black; background: #0489B1" href="food.jsp?date=${fn:escapeXml(date)}">Food</a></li>
-					<li><a style="color: black" href="exerise.jsp?date=${fn:escapeXml(date)}">Exerise</a></li>
+					<li><a style="color: black" href="food.jsp?date=${fn:escapeXml(date)}">Food</a></li>
+					<li><a style="color: black; background: #0489B1" href="exerise.jsp?date=${fn:escapeXml(date)}">Exerise</a></li>
 					<li><a style="color: black" href="weight.jsp?date=${fn:escapeXml(date)}">Weight</a></li>
 				</ul>
 				</div>
 				<fieldset style="margin-left: 8px; margin-right: 2px">
-				<form id ="submitform1" name="form1" action="/context/enqueue/newfood/?date=${fn:escapeXml(date)}" method="post">
-					<p>Please enter your food details:</p>
+				<form id ="submitform1" name="form1" action="/context/enqueue/newexerise?date=${fn:escapeXml(date)}" method="post">
+					<p>Please enter your exerise details:</p>
 					<div>
-						<p>Breakfast</p>
-						<select name="breakfast">
+						<p>exerise1</p>
+						<select name="exerise1">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
 						</select>
-						<p>Lunch</p>
-						<select name="lunch">
+						<p>exerise2</p>
+						<select name="exerise2">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
 						</select>
-						<p>Dinner</p>
-						<select name="dinner">
+						<p>exerise3</p>
+						<select name="exerise3">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>

@@ -17,18 +17,18 @@ import com.google.appengine.api.memcache.ErrorHandlers;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
-@Path("/foodworker")
-public class FoodWorker {
+@Path("/exeriseworker")
+public class ExeriseWorker {
 	@POST
-	@Path("/createfood")
-	public void createFood(@Context HttpServletRequest httpRequest)
+	@Path("/createexerise")
+	public void createExerise(@Context HttpServletRequest httpRequest)
 			throws Exception{
 
 		String userName = httpRequest.getParameter("userName");
 		String dateString = httpRequest.getParameter("date");
-		String breakfast = httpRequest.getParameter("breakfast");
-		String lunch = httpRequest.getParameter("lunch");
-		String dinner = httpRequest.getParameter("dinner");
+		String exerise1 = httpRequest.getParameter("exerise1");
+		String exerise2 = httpRequest.getParameter("exerise2");
+		String exerise3 = httpRequest.getParameter("exerise3");
 		
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -39,9 +39,9 @@ public class FoodWorker {
 
 		record.setProperty("date", dateString);
 		record.setProperty("userName", userName);
-		record.setProperty("breakfast", breakfast);
-		record.setProperty("lunch", lunch);
-		record.setProperty("dinner", dinner);
+		record.setProperty("exerise1", exerise1);
+		record.setProperty("exerise2", exerise2);
+		record.setProperty("exerise3", exerise3);
 		datastore.put(record);
 	}
 	
