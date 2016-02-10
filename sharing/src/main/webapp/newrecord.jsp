@@ -1,25 +1,40 @@
 <%@ page import="com.google.appengine.api.users.User"%>
 <%@ page import="com.google.appengine.api.users.UserService"%>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory"%>
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link type="text/css" rel="stylesheet" href="/stylesheets/header.css" />
-<style>
-#formpage {clear ="both";}
-</style>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" href="../../favicon.ico">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/css/bootstrap.min.css" >
+	<link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/css/datepicker.css" />
+	<style>
+		#formpage {clear ="both";}
+	</style>
+
+
 <title>Record Today</title>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
-	
-</script>
-<script language="JavaScript">
+
+<!--<script language="JavaScript">
 	window.onload = function() {
 		strYYYY = document.form1.YYYY.outerHTML;
 		strMM = document.form1.MM.outerHTML;
@@ -75,7 +90,7 @@
 	function IsPinYear(year) {
 		return (0 == year % 4 && (year % 100 != 0 || year % 400 == 0))
 	}
-//-->
+-->
 </script>
 
 
@@ -87,22 +102,52 @@
 		User userName = userService.getCurrentUser();
 		pageContext.setAttribute("userName", userName);
 	%>
-<div id="container">
-	<div id="header" class="headernav">
-		<h3 float="right">Welcome! ${fn:escapeXml(userName)}</h3>
-		<ul>
-		<li><a href="<%=userService.createLogoutURL(request.getRequestURI())%>">SignOut</a></li>
-		<li><a href="allrecords.jsp">MyHistory</a></li>
-		<li><a href="newrecord.jsp">RecordToday</a></li>
-		<li><a href="welcome.jsp">Home</a></li>
-		</ul>
-	</div>
-	
-	
-	<div class="formpage" style="position: relative; left: 150px;">
+	<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Health Diary</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="welcome.jsp">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+                        <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menue <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="newrecord.jsp">Record Today</a></li>
+                <li><a href="allrecords.jsp">Record History</a></li>
+                <li><a href="#">My plan</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+            <ul class="nav navbar-nav navbar-right">
+            	<li><a href="../navbar/">Welcome! ${fn:escapeXml(userName)}</a></li>
+            	<li><a href="<%=userService.createLogoutURL("welcome.jsp")%>">Sign out</a></li>
+          	</ul>
+           </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+   <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Record Today</h1>
+        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+    	<div class="formpage" style="position: relative; left: 150px;">
 		<form name="form1" id="submitform" action="/context/enqueue/newrecord" method="post">
 			<fieldset>
-				<h2>Please Enter Your record</h2>
 				<!-- <p>Name Your New Record:<input type="text" name="RecordName"></p> -->
 				<p>Enter Your Start Date:</p>
 				<!-- First Name: <input type="text" name="first_name">
@@ -111,9 +156,21 @@
 				
 				<select name=YYYY onchange="YYYYMM(this.value)">
 						<option value="">Year</option>
+						<option value=1>1</option>
+						<option value=2>2</option>
+						<option value=3>3</option>
+						<option value=4>4</option>
+						<option value=5>5</option>
+						<option value=6>6</option>
 				</select>
 				<select name=MM onchange="MMDD(this.value)">
 						<option value="">Month</option>
+						<option value=1>1</option>
+						<option value=2>2</option>
+						<option value=3>3</option>
+						<option value=4>4</option>
+						<option value=5>5</option>
+						<option value=6>6</option>
 				</select>
 				<select name=DD >
 						<option value="">Day</option>
@@ -130,5 +187,12 @@
 		</form>
 	</div>
 </div>
+      </div>
+
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="stylesheets/js/bootstrap.min.js"></script>
+    <script src="stylesheets/js/bootstrap-datepicker.js"></script>
+
 </body>
 </html>

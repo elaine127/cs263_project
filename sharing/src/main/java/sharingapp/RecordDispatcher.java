@@ -83,6 +83,19 @@ public class RecordDispatcher {
 		return Response.temporaryRedirect(new URI("/weight.jsp?date=" + date)).build();
 		
 	}
-
+	@POST
+	@Path("/deleterecord")
+	@Consumes("application/x-www-form-urlencoded")
+	public Response deleteRecord(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, URISyntaxException{
+		UserService userService = UserServiceFactory.getUserService();
+		User userName = userService.getCurrentUser();
+		String date = request.getParameter("date");
+		
+		Queue q = QueueFactory.getDefaultQueue();
+		q.add(withUrl("/context/recordworker/deleterecord").param("date", date).param("userName", userName.toString()));
+		return Response.temporaryRedirect(new URI("/allrecords.jsp")).build();
+		
+		
+	}
 		
 }

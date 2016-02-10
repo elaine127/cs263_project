@@ -43,10 +43,21 @@ public class RecordWorker {
 	public void deleteRecord(@Context HttpServletRequest httpRequest)
 			throws Exception{
 		String userName = httpRequest.getParameter("userName");
-		String planName = httpRequest.getParameter("planName");
+		String date = httpRequest.getParameter("date");
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Key parentKey = KeyFactory.createKey("User", userName);
-		Key planKey = KeyFactory.createKey(parentKey, "Plan", planName);
+		Key dateKey = KeyFactory.createKey(parentKey, "date", date);
+		
+//		Query q = new Query("Record").setAncestor(dateKey);
+//		PreparedQuery pd = datastore.prepare(q);
+//		for(Entity e: pd.asIterable()){
+//			datastore.delete(e.getKey());
+//		}
+		
+		datastore.delete(dateKey);
+//		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
+//		syncCache.delete(dateKey);
+//		
 		
 		
 	}
