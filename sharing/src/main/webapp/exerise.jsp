@@ -41,8 +41,8 @@
     <link type="text/css" rel="stylesheet" href="/stylesheets/css/bootstrap.min.css" >
 	<link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
 	<link type="text/css" rel="stylesheet" href="/stylesheets/css/datepicker.css" />
-	<link type="text/css" rel="stylesheet" href="/stylesheets/innerNav.css" />
-	
+	<!-- <link type="text/css" rel="stylesheet" href="/stylesheets/innerNav.css" />
+	 -->
 
 	<style>
 		#formpage {clear ="both";}
@@ -200,10 +200,10 @@
 		<% 
 		}else{
 				DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-				Query q1 = new Query("exerise").setAncestor(dateKey);
-				PreparedQuery pq1 = datastore.prepare(q1);
+				Query q = new Query("exerise").setAncestor(dateKey);
+				PreparedQuery pq = datastore.prepare(q);
 				
-				for(Entity result: pq1.asIterable()){
+				for(Entity result: pq.asIterable()){
 					String exerise1 = (String)result.getProperty("exerise1");
 					String exerise2 = (String)result.getProperty("exerise2");
 					String exerise3 = (String)result.getProperty("exerise3");

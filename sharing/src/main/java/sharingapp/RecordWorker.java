@@ -45,16 +45,42 @@ public class RecordWorker {
 		String userName = httpRequest.getParameter("userName");
 		String date = httpRequest.getParameter("date");
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		
 		Key parentKey = KeyFactory.createKey("User", userName);
 		Key dateKey = KeyFactory.createKey(parentKey, "date", date);
+		Key foodKey = KeyFactory.createKey(dateKey,"food", "food");
+		Key exeriseKey = KeyFactory.createKey(dateKey,"exerise", "exerise");
+		Key weightKey = KeyFactory.createKey(dateKey,"weight", "weight");
 		
-//		Query q = new Query("Record").setAncestor(dateKey);
+		datastore.delete(dateKey);
+		datastore.delete(foodKey);
+		datastore.delete(exeriseKey);
+		datastore.delete(weightKey);
+		
+		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
+		syncCache.delete(dateKey);
+		syncCache.delete(foodKey);
+		syncCache.delete(exeriseKey);
+		syncCache.delete(weightKey);
+		
+		
+//		Query q = new Query("food").setAncestor(dateKey);
+//		PreparedQuery pd = datastore.prepare(q);
+//		for(Entity e: pd.asIterable()){
+//			datastore.delete(e.getKey());
+//		}
+//		Query q = new Query("exerise").setAncestor(dateKey);
+//		PreparedQuery pd = datastore.prepare(q);
+//		for(Entity e: pd.asIterable()){
+//			datastore.delete(e.getKey());
+//		}
+//		Query q = new Query("food").setAncestor(dateKey);
 //		PreparedQuery pd = datastore.prepare(q);
 //		for(Entity e: pd.asIterable()){
 //			datastore.delete(e.getKey());
 //		}
 		
-		datastore.delete(dateKey);
+		
 //		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
 //		syncCache.delete(dateKey);
 //		

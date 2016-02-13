@@ -104,7 +104,7 @@
       <div>
       	<form action="/context/enqueue/deleterecord?date=${fn:escapeXml(date)}" method="post">
       	<h1>
-      		<a href ="">${fn:escapeXml(date)}</a>
+      		<a href ="plandetails.jsp?date=${fn:escapeXml(date)}">${fn:escapeXml(date)}</a>
       		<input type="submit" value="Delete This Plan">
       	</h1>
       	</form>
