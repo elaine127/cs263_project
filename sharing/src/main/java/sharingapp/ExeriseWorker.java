@@ -34,6 +34,7 @@ public class ExeriseWorker {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Key parentKey = KeyFactory.createKey("User", userName);
 		Key dateKey = KeyFactory.createKey(parentKey, "date", dateString);
+		Key exeriseKey = KeyFactory.createKey(dateKey, "exerise","exerise");
 		
 		Entity record = new Entity(dateKey);
 
@@ -43,6 +44,10 @@ public class ExeriseWorker {
 		record.setProperty("exerise2", exerise2);
 		record.setProperty("exerise3", exerise3);
 		datastore.put(record);
+		
+		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
+		syncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
+		syncCache.put(exeriseKey, record);		
 	}
 	
 	@POST

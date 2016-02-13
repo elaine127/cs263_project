@@ -17,6 +17,8 @@ import com.google.appengine.api.memcache.ErrorHandlers;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
+
+
 @Path("/foodworker")
 public class FoodWorker {
 	@POST
@@ -34,8 +36,9 @@ public class FoodWorker {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Key parentKey = KeyFactory.createKey("User", userName);
 		Key dateKey = KeyFactory.createKey(parentKey, "date", dateString);
+		Key foodKey = KeyFactory.createKey(dateKey, "food", "food");
 		
-		Entity record = new Entity(dateKey);
+		Entity record = new Entity(foodKey);
 
 		record.setProperty("date", dateString);
 		record.setProperty("userName", userName);
@@ -43,6 +46,11 @@ public class FoodWorker {
 		record.setProperty("lunch", lunch);
 		record.setProperty("dinner", dinner);
 		datastore.put(record);
+		//
+		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
+		syncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
+		syncCache.put(foodKey, record);
+		
 	}
 	
 	@POST

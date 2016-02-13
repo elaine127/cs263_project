@@ -2,6 +2,25 @@
 <%@ page import="com.google.appengine.api.users.UserService"%>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory"%>
 
+<%@ page import="com.google.appengine.api.memcache.MemcacheService"%>
+<%@ page import="com.google.appengine.api.memcache.ErrorHandlers"%>
+<%@ page import="com.google.appengine.api.memcache.MemcacheServiceFactory"%>
+
+<%@ page import="com.google.appengine.api.datastore.Key"%>
+<%@ page import="com.google.appengine.api.datastore.KeyFactory"%>
+<%@ page import="com.google.appengine.api.datastore.DatastoreService"%>
+<%@ page import="com.google.appengine.api.datastore.DatastoreServiceFactory"%>
+<%@ page import="com.google.appengine.api.datastore.Entity"%>
+
+<%@ page import="com.google.appengine.api.datastore.Query"%>
+<%@ page import="com.google.appengine.api.datastore.PreparedQuery"%>
+<%@ page import="com.google.appengine.api.datastore.DatastoreService"%>
+<%@ page import="com.google.appengine.api.datastore.Query.Filter"%>
+<%@ page import="com.google.appengine.api.datastore.Query.SortDirection"%>
+<%@ page import="com.google.appengine.api.datastore.Query.FilterPredicate"%>
+<%@ page import="com.google.appengine.api.datastore.Query.FilterOperator"%>
+
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -22,6 +41,8 @@
     <link type="text/css" rel="stylesheet" href="/stylesheets/css/bootstrap.min.css" >
 	<link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
 	<link type="text/css" rel="stylesheet" href="/stylesheets/css/datepicker.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/innerNav.css" />
+	
 
 	<style>
 		#formpage {clear ="both";}
@@ -36,6 +57,18 @@
 		pageContext.setAttribute("userName",userName);
 		String date = request.getParameter("date");
 		pageContext.setAttribute("date", date);
+		
+		Key parentKey = KeyFactory.createKey("User", userName);
+		Key dateKey = KeyFactory.createKey(parentKey, "date", date);
+		
+		Key foodKey = KeyFactory.createKey(dateKey, "food", "food");
+		Key exeriseKey = KeyFactory.createKey(dateKey, "exerise", "exerise");
+		Key weightKey = KeyFactory.createKey(dateKey, "weight", "weight");
+		
+		pageContext.setAttribute("exeriseKey", exeriseKey);
+		pageContext.setAttribute("foodKey", foodKey);
+		pageContext.setAttribute("weightKey", weightKey);
+		
 	%>
 
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -83,6 +116,9 @@
   		<li class="active"><a href="exerise.jsp?date=${fn:escapeXml(date)}">Exerise</a></li>
   		<li ><a href="weight.jsp?date=${fn:escapeXml(date)}">Weight </a></li>
 	   </ul>
+	   
+<div class="body">
+ 	<div class="leftbody">
     <h3>HOME</h3>
     <p>Some content.</p>
     <fieldset style="margin-left: 8px; margin-right: 2px">
@@ -90,21 +126,21 @@
 					<p>Please enter your food details:</p>
 					<div>
 						<p>Exerise1</p>
-						<select name="Exerise1">
+						<select name="exerise1">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
 						</select>
 						<p>Exerise2</p>
-						<select name="Exerise2">
+						<select name="exerise2">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
 						</select>
 						<p>Exerise3</p>
-						<select name="Exerise3">
+						<select name="exerise3">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -117,6 +153,94 @@
 				</form>
 	</fieldset>
   	</div>
+  	<div class="rightbody">
+		<h3>Plan Summary(start at ${fn:escapeXml(date)}):</h3>
+		<%
+			MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
+			if(syncCache.get(foodKey) != null ){
+				Entity e = (Entity)syncCache.get(foodKey);
+				String breakfast = (String)e.getProperty("breakfast");
+				String lunch = (String)e.getProperty("lunch");
+				String dinner = (String)e.getProperty("dinner");
+				pageContext.setAttribute("breakfast", breakfast);
+				pageContext.setAttribute("lunch", lunch);
+				pageContext.setAttribute("dinner", dinner);
+		%>
+		<p>breakfast:${fn:escapeXml(breakfast)}; lunch:${fn:escapeXml(lunch)}; dinner:${fn:escapeXml(dinner)}</p>
+		<% 
+			}else{
+				DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+				Query q = new Query("food").setAncestor(dateKey);
+				PreparedQuery pq = datastore.prepare(q);
+				
+				for(Entity result: pq.asIterable()){
+					String breakfast = (String)result.getProperty("breakfast");
+					String lunch = (String)result.getProperty("lunch");
+					String dinner = (String)result.getProperty("dinner");
+					pageContext.setAttribute("breakfast", breakfast);
+					pageContext.setAttribute("lunch", lunch);
+					pageContext.setAttribute("dinner", dinner);
+				}
+		%>
+		<p>breakfast:${fn:escapeXml(breakfast)}; lunch:${fn:escapeXml(lunch)}; dinner:${fn:escapeXml(dinner)}</p>
+		<%
+			}
+			if(syncCache.get(exeriseKey) != null ){
+				Entity e = (Entity)syncCache.get(exeriseKey);
+				String exerise1 = (String)e.getProperty("exerise1");
+				String exerise2 = (String)e.getProperty("exerise2");
+				String exerise3 = (String)e.getProperty("exerise3");
+				pageContext.setAttribute("exerise1", exerise1);
+				pageContext.setAttribute("exerise2", exerise2);
+				pageContext.setAttribute("exerise3", exerise3);
+			
+		%>
+		<p>exerise1:${fn:escapeXml(exerise1)}; exerise2:${fn:escapeXml(exerise2)}; exerise3:${fn:escapeXml(exerise3)}</p>
+
+		<% 
+		}else{
+				DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+				Query q = new Query("exerise").setAncestor(dateKey);
+				PreparedQuery pq = datastore.prepare(q);
+				
+				for(Entity result: pq.asIterable()){
+					String exerise1 = (String)result.getProperty("exerise1");
+					String exerise2 = (String)result.getProperty("exerise2");
+					String exerise3 = (String)result.getProperty("exerise3");
+					pageContext.setAttribute("exerise1", exerise1);
+					pageContext.setAttribute("exerise2", exerise2);
+					pageContext.setAttribute("exerise3", exerise3);
+				}
+		%>
+		<p>exerise1:${fn:escapeXml(exerise1)}; exerise2:${fn:escapeXml(exerise2)}; exerise3:${fn:escapeXml(exerise3)}</p>
+		<%
+			}
+		%>
+		<%
+			if(syncCache.get(weightKey) != null ){
+				Entity e = (Entity)syncCache.get(weightKey);
+				String weight = (String)e.getProperty("weight");
+				pageContext.setAttribute("weight", weight);
+		%>
+		<p>weight:${fn:escapeXml(weight)}</p>
+
+		<% 
+		}else{
+				DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+				Query q = new Query("weight").setAncestor(dateKey);
+				PreparedQuery pq = datastore.prepare(q);
+				
+				for(Entity result: pq.asIterable()){
+					String weight = (String)result.getProperty("weight");
+					pageContext.setAttribute("weight", weight);
+				}
+		%>
+		<p>weight:${fn:escapeXml(weight)}</p>
+		<%
+			}
+		%>
+	</div>
+  	 
   	</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

@@ -32,13 +32,20 @@ public class WeightWorker {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Key parentKey = KeyFactory.createKey("User", userName);
 		Key dateKey = KeyFactory.createKey(parentKey, "date", dateString);
+		Key weightKey = KeyFactory.createKey(dateKey,"weight", "weight");
 		
-		Entity record = new Entity(dateKey);
+		Entity record = new Entity(weightKey);
 
 		record.setProperty("date", dateString);
 		record.setProperty("userName", userName);
 		record.setProperty("weight", weight);
+		
 		datastore.put(record);
+		
+		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
+		syncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
+		syncCache.put(weightKey, record);		
+	
 	}
 	
 	@POST
