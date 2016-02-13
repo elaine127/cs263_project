@@ -200,10 +200,10 @@
 		<% 
 		}else{
 				DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-				Query q = new Query("exerise").setAncestor(dateKey);
-				PreparedQuery pq = datastore.prepare(q);
+				Query q1 = new Query("exerise").setAncestor(dateKey);
+				PreparedQuery pq1 = datastore.prepare(q1);
 				
-				for(Entity result: pq.asIterable()){
+				for(Entity result: pq1.asIterable()){
 					String exerise1 = (String)result.getProperty("exerise1");
 					String exerise2 = (String)result.getProperty("exerise2");
 					String exerise3 = (String)result.getProperty("exerise3");

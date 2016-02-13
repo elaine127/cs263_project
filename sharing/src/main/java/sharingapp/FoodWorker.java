@@ -46,7 +46,7 @@ public class FoodWorker {
 		record.setProperty("lunch", lunch);
 		record.setProperty("dinner", dinner);
 		datastore.put(record);
-		//
+		
 		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
 		syncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
 		syncCache.put(foodKey, record);

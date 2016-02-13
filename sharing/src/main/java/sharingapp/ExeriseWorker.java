@@ -36,7 +36,7 @@ public class ExeriseWorker {
 		Key dateKey = KeyFactory.createKey(parentKey, "date", dateString);
 		Key exeriseKey = KeyFactory.createKey(dateKey, "exerise","exerise");
 		
-		Entity record = new Entity(dateKey);
+		Entity record = new Entity(exeriseKey);
 
 		record.setProperty("date", dateString);
 		record.setProperty("userName", userName);
