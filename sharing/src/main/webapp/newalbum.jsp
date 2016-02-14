@@ -27,6 +27,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,30 +36,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="description" content="">
     <meta name="author" content="">
+
     <link rel="icon" href="../../favicon.ico">
-    <!-- Bootstrap core CSS -->
     <link type="text/css" rel="stylesheet" href="/stylesheets/css/bootstrap.min.css" >
+	<link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
 	<link type="text/css" rel="stylesheet" href="/stylesheets/css/datepicker.css" />
+	<!-- <link type="text/css" rel="stylesheet" href="/stylesheets/innerNav.css" />
+	 -->
+
 	<style>
 		#formpage {clear ="both";}
 	</style>
-<title>All Records</title>
 
+<title>Record Exerise</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
-
 <body>
-
 <%
-UserService userService = UserServiceFactory.getUserService();
-String userName = userService.getCurrentUser().toString();
-pageContext.setAttribute("userName",userName);
-
-
-
-Key parentKey = KeyFactory.createKey("User", userName);
-
-
-%>
+		UserService userService = UserServiceFactory.getUserService();
+		String userName = userService.getCurrentUser().toString();
+		pageContext.setAttribute("userName",userName);
+	
+	%>
 <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -92,28 +92,17 @@ Key parentKey = KeyFactory.createKey("User", userName);
           	</ul>
            </div>
       </div>
-</nav>
+</nav> 
+
 <div class="container">
       <!-- Main component for a primary marketing message or call to action -->
-      <div id="list" class="jumbotron">
-      	<!-- <div id="list"></div> -->
+      <div class="jumbotron">
+      <form id="submitform" name='form1' action='/context/album/newalbum' method='post'>
+		<p>Name Your New Album:<input type="text" name="albumName"></p>
+		<p>Notes about this album:<input type="text" name="notes"></p>
+		<p><input type="submit" value="Submit"></p>
+	  </form>
       </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="stylesheets/js/bootstrap.min.js"></script>
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		//$getJSON("context/album/allalbum", function(data){
-
-			$("#list").append(
-					'<div>'
-					+'<h2 style="margin:50px;"> <a href="newalbum.jsp">Add New Album </a>'
-					+'</h2>'
-					+'</div>'
-					);
-		
-	});
-</script>
 </body>
 </html>

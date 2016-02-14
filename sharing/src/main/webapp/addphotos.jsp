@@ -20,6 +20,9 @@
 <%@ page import="com.google.appengine.api.datastore.Query.FilterPredicate"%>
 <%@ page import="com.google.appengine.api.datastore.Query.FilterOperator"%>
 
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory"%>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService"%>
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -48,11 +51,14 @@
 <body>
 
 <%
+
 UserService userService = UserServiceFactory.getUserService();
 String userName = userService.getCurrentUser().toString();
 pageContext.setAttribute("userName",userName);
+String albumName = request.getParameter("albumName");
+pageContext.setAttribute("albumName", albumName);
 
-
+BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
 Key parentKey = KeyFactory.createKey("User", userName);
 
@@ -97,23 +103,14 @@ Key parentKey = KeyFactory.createKey("User", userName);
       <!-- Main component for a primary marketing message or call to action -->
       <div id="list" class="jumbotron">
       	<!-- <div id="list"></div> -->
+      	<form action="<%=blobstoreService.createUploadUrl("/context/album/upload?albumName="+albumName)%>" method="post" enctype="multipart/form-data">	
+      	<h1>Please Choose Images(s) To Upload:</h1>
+      	<input type="file" multiplename="myFile">
+      	<input type="submit" value="Submit">
+      	</form>
       </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="stylesheets/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		//$getJSON("context/album/allalbum", function(data){
 
-			$("#list").append(
-					'<div>'
-					+'<h2 style="margin:50px;"> <a href="newalbum.jsp">Add New Album </a>'
-					+'</h2>'
-					+'</div>'
-					);
-		
-	});
-</script>
 </body>
 </html>
