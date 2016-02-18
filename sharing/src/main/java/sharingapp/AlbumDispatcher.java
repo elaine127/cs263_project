@@ -34,6 +34,8 @@ import com.google.appengine.api.blobstore.FileInfo;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.Filter;
@@ -87,20 +89,25 @@ public class AlbumDispatcher {
 	@Path("/allalbums")
 
 	public List<AlbumData> getAllAlbums() throws Exception {
+		
 		UserService userService = UserServiceFactory.getUserService();
 		ImagesService imagesService = ImagesServiceFactory.getImagesService();
 		User userName = userService.getCurrentUser();
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		Filter propertyFilter = new FilterPredicate("userName",FilterOperator.EQUAL, userName.toString());
-		Query q = new Query("albumName").setFilter(propertyFilter);
-		PreparedQuery pq = datastore.prepare(q);
-		List<AlbumData> la = new ArrayList<AlbumData>();
-		for (Entity entity : pq.asIterable()) {
-			List<String> list = (ArrayList<String>) entity.getProperty("list");
+		
+		Key parentKey = KeyFactory.createKey("User", userName.toString());
+      	Query q = new Query("Album").setAncestor(parentKey);
+      	PreparedQuery pq = datastore.prepare(q);
+      	List<AlbumData> la = new ArrayList<AlbumData>();
+      	for(Entity entity: pq.asIterable()){
+			System.out.println("Inhere");
+			//List<BlobKey> list = (ArrayList<BlobKey>) entity.getProperty("list");
+			List<BlobKey> list = (List<BlobKey>) entity.getProperty("list");
 			String imageUrl = null;
 			if(list != null){
+				System.out.println("list != null");
 				for(int i =0; i < list.size(); i++){
-					BlobKey blobKey = new BlobKey(list.get(i));
+					BlobKey blobKey = list.get(i);
 					try{
 						imageUrl = imagesService.getServingUrl(blobKey);
 						break;
@@ -110,13 +117,15 @@ public class AlbumDispatcher {
 					}
 				}
 			}
-			if(imageUrl ==null)
+			if(imageUrl ==null){
+				System.out.println("imageUrl == null");
 				imageUrl="/images/no_image.png";
-			
+			}
 			AlbumData ad = new AlbumData(entity.getProperty("albumName").toString(), entity.getProperty("notes").toString(), imageUrl);
 			
 			la.add(ad);		
 	}
+		System.out.println(la.size());
 		return la;
 		
 	}

@@ -42,7 +42,9 @@ public class AlbumWorker {
 		String notes = request.getParameter("notes");
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		Key albumKey = KeyFactory.createKey("Album", userName + albumName);
+		
+		Key parentKey = KeyFactory.createKey("User", userName);
+		Key albumKey = KeyFactory.createKey(parentKey, "Album", albumName);
 		List<BlobKey> list = new ArrayList<BlobKey>();
 		
 		Entity album = new Entity(albumKey);
@@ -66,11 +68,11 @@ public class AlbumWorker {
 		String blobKey = request.getParameter("blobKey");
 		
 		BlobKey k = new BlobKey(blobKey);
-//		
-		Key albumKey = KeyFactory.createKey("Album", userName + albumName);
-		Entity album = datastore.get(albumKey);
 		
-		//List<BlobKey> l = (ArrayList<String>) album.getProperty("list");
+		Key parentKey = KeyFactory.createKey("User", userName);
+		Key albumKey = KeyFactory.createKey(parentKey, "Album", albumName);
+		Entity album = datastore.get(albumKey);
+	
 		List<BlobKey> list = (List<BlobKey>) album.getProperty("list");
 		if(list == null){
 			list = new ArrayList<BlobKey>();	}

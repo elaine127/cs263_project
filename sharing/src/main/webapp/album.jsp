@@ -92,26 +92,29 @@ Key parentKey = KeyFactory.createKey("User", userName);
 </nav>
 <div class="container">
       <!-- Main component for a primary marketing message or call to action -->
-      <div id="list" class="jumbotron">
-      	<!-- <div id="list"></div> -->
+      <div  class="jumbotron">
+      <a>hello</a>
       </div>
+      <div id="list">
+      </div> 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="stylesheets/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$.getJSON("context/album/allalbums", function(data){
+		$.getJSON("/context/album/allalbums", function(data){
+			console.log(data.length);
 			$.each(data,function(i, item){
 				$("#list").append(
 						'<div id ="photo" class ="photo" style="width:240px; height:260px;float:left" >'
-						+'<h4  align="center" style="margin-top:2px; margin-bottom:3px">'
+						+'<h4  align="center" style="margin-top:2px; margin-bottom:3px">AlbumName: '
 						+item.albumName
 						+'</h4>'
 						+'<a href="addphotos.jsp?albumName='
 					    +item.albumName
-					    +'>'
-					    +'<img  style="padding-top: 0px;padding-left: 20px;width:200px;height:180px" src="'
+					    +'"\>'
+					    +'<img style="padding-top: 0px;padding-left: 20px;width:200px;height:180px" src="'
 					    + item.imageUrl
 					    +'" /><br/>'
 					    + '</a>'
