@@ -25,16 +25,16 @@
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="application/xml"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
@@ -103,14 +103,45 @@ Key parentKey = KeyFactory.createKey("User", userName);
       <!-- Main component for a primary marketing message or call to action -->
       <div id="list" class="jumbotron">
       	<!-- <div id="list"></div> -->
-      	<form action="<%=blobstoreService.createUploadUrl("/context/album/upload?albumName="+albumName)%>" method="post" enctype="multipart/form-data">	
-      	<h1>Please Choose Images(s) To Upload:</h1>
-      	<input type="file" multiplename="myFile">
-      	<input type="submit" value="Submit">
-      	</form>
+      	
+      	<form action="<%= blobstoreService.createUploadUrl("/context/album/upload?albumName="+albumName)%>" method="post" enctype="multipart/form-data">
+            <input type="file" name="myFile"><input type="submit" value="Submit">
+        </form>
+    
       </div>
-</div>
-
+</div> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="stylesheets/js/bootstrap.min.js"></script>
+  
 
 </body>
 </html>
+
+
+
+<%-- <%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory"%>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%
+	BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+%>
+
+
+<html>
+<head>
+<title>Trip Plan Upload photos</title>
+</head>
+<body>
+	<%
+		String albumName = request.getParameter("albumName");
+		pageContext.setAttribute("albumName", albumName);
+	%>
+	<form
+		action="<%=blobstoreService.createUploadUrl("/context/album/upload?albumName="+albumName)%>"
+		method="post" enctype="multipart/form-data">		
+		Please Choose Images(s) To Upload: <input type="file" name="myFile"> <input type="submit" value="Submit">
+	</form>
+</body>
+</html>
+ --%>

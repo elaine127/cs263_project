@@ -51,9 +51,6 @@
 UserService userService = UserServiceFactory.getUserService();
 String userName = userService.getCurrentUser().toString();
 pageContext.setAttribute("userName",userName);
-
-
-
 Key parentKey = KeyFactory.createKey("User", userName);
 
 
@@ -104,15 +101,35 @@ Key parentKey = KeyFactory.createKey("User", userName);
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		//$getJSON("context/album/allalbum", function(data){
-
+		$.getJSON("context/album/allalbums", function(data){
+			$.each(data,function(i, item){
+				$("#list").append(
+						'<div id ="photo" class ="photo" style="width:240px; height:260px;float:left" >'
+						+'<h4  align="center" style="margin-top:2px; margin-bottom:3px">'
+						+item.albumName
+						+'</h4>'
+						+'<a href="addphotos.jsp?albumName='
+					    +item.albumName
+					    +'>'
+					    +'<img  style="padding-top: 0px;padding-left: 20px;width:200px;height:180px" src="'
+					    + item.imageUrl
+					    +'" /><br/>'
+					    + '</a>'
+					    + '<p  align="center" style="margin-top:2px; margin-bottom:3px">'
+					    + item.notes
+					    + '</p> <form action="/context/album/deletealbum?albumName='
+					    + item.albumName
+					    +'" method="post"> <input align="center" type="submit" value="Delete"></form>'
+					    + '</div>'
+						);
+			});
 			$("#list").append(
-					'<div>'
-					+'<h2 style="margin:50px;"> <a href="newalbum.jsp">Add New Album </a>'
-					+'</h2>'
-					+'</div>'
-					);
-		
+					    '<div id="newlink" style="width:240px; height:240px;float:left" >'
+					    + '<h2 style="margin:50px;"> <a href="newalbum.jsp">Add New Album </a>'
+					    + '</h2>'
+					    + '</div>'
+						);
+		});
 	});
 </script>
 </body>
