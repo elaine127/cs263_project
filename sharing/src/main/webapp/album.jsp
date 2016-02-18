@@ -93,7 +93,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
 <div class="container">
       <!-- Main component for a primary marketing message or call to action -->
       <div  class="jumbotron">
-      <a>hello</a>
+      <a>Album Display</a>
       </div>
       <div id="list">
       </div> 

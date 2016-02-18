@@ -70,7 +70,7 @@
               <ul class="dropdown-menu">
                 <li><a href="newrecord.jsp">Record Today</a></li>
                 <li><a href="allrecords.jsp">Record History</a></li>
-                <li><a href="#">My plan</a></li>
+                <li><a href="album.jsp">My Album</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Nav header</li>
                 <li><a href="#">Separated link</a></li>
@@ -95,7 +95,8 @@
       	DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
       	pageContext.setAttribute("userName", userName.toString());
       	Key parentKey = KeyFactory.createKey("User", userName.toString());
-      	Query q = new Query("date").setAncestor(parentKey).addSort("date",SortDirection.DESCENDING);
+      	Query q = new Query("date").setAncestor(parentKey);
+      	//.addSort("date",SortDirection.DESCENDING)
       	PreparedQuery pq = ds.prepare(q);
       	for(Entity e: pq.asIterable()){
       		String date = (String)e.getProperty("date");
