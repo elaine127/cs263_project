@@ -20,10 +20,17 @@
 
     <title>Fixed Top Navbar Example for Bootstrap</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="stylesheets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    </head>
+    <!-- Bootstrap core CSS --><!-- 
+    <link rel="stylesheet" type="text/css" href="/stylesheets/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/css/elastislide.css" />
+     -->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&v1' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css' />
+   
+    <link rel="stylesheet" href="stylesheets/css/bootstrap.min.css" >
+    <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    --> </head>
 
   <body>
  <%
@@ -126,7 +133,7 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Keep record, username != null</h1>
+        <h1>Keep record</h1>
         <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
         <p>To see the difference between static and fixed top navbars, just scroll.</p>
         
@@ -144,7 +151,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="stylesheets/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     
      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     </body>

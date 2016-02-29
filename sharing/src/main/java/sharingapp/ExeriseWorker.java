@@ -26,9 +26,7 @@ public class ExeriseWorker {
 
 		String userName = httpRequest.getParameter("userName");
 		String dateString = httpRequest.getParameter("date");
-		String exerise1 = httpRequest.getParameter("exerise1");
-		String exerise2 = httpRequest.getParameter("exerise2");
-		String exerise3 = httpRequest.getParameter("exerise3");
+		String exerise = httpRequest.getParameter("exerise");
 		
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -40,9 +38,7 @@ public class ExeriseWorker {
 
 		record.setProperty("date", dateString);
 		record.setProperty("userName", userName);
-		record.setProperty("exerise1", exerise1);
-		record.setProperty("exerise2", exerise2);
-		record.setProperty("exerise3", exerise3);
+		record.setProperty("exerise", exerise);
 		datastore.put(record);
 		
 		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();

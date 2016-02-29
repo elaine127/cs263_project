@@ -55,7 +55,18 @@ public class AlbumWorker {
 		datastore.put(album);
 
 	}
-	
+	@POST
+	@Path("/deletealbum")
+	public void deleteAlbum(@Context HttpServletRequest request)
+			throws Exception {
+        System.out.println("delete---------");
+		String userName = request.getParameter("userName");
+		String albumName = request.getParameter("albumName");
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		Key parentKey = KeyFactory.createKey("User", userName);
+		Key albumKey = KeyFactory.createKey(parentKey, "Album", albumName);
+		datastore.delete(albumKey);
+	}
 	@POST
 	@Path("/addphoto")
 	public void addPhoto(@Context HttpServletRequest request) throws Exception{

@@ -22,39 +22,30 @@
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-    <!-- Bootstrap core CSS -->
-    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" >
-
-	
-	<style>
-		#formpage {clear ="both";}
-	</style>
-<title>All Records</title>
-
+  <meta charset="utf-8">
+  <title>ResponsiveSlides.js &middot; Responsive jQuery slideshow</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" >
+    
+  <link rel="stylesheet" href="/stylesheets/demo.css">
+  
+<!--   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ -->  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   
 </head>
 
 <body>
-
 <%
 UserService userService = UserServiceFactory.getUserService();
 String userName = userService.getCurrentUser().toString();
 pageContext.setAttribute("userName",userName);
+String albumName = request.getParameter("albumName");
+pageContext.setAttribute("albumName", albumName);
 Key parentKey = KeyFactory.createKey("User", userName);
-
-
 %>
 <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -91,52 +82,54 @@ Key parentKey = KeyFactory.createKey("User", userName);
            </div>
       </div>
 </nav>
-<div class="container">
-      <!-- Main component for a primary marketing message or call to action -->
-      <div  class="jumbotron">
-      <a>Album Display</a>
-      </div>
-      <div class="es-carousel">
-     	 <ul id="list">
-      </ul> 
-      </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="stylesheets/js/bootstrap.min.js"></script>
+<div id="wrapper">
+    <h1>ResponsiveSlides.js</h1>
+    <h2>Simple &amp; lightweight responsive slideshow plugin (in 1k</h2>
 
-<script type="text/javascript">
+    <!-- Slideshow 4 -->
+    <div class="callbacks_container">
+      <ul class="rslides" id="slider4">
+ 
+      </ul>
+    </div>
+  <!--    <ul class="events">
+      <li><h3>Example 4 callback events</h3></li>
+    </ul> -->
+    </div>
+     
+ <script type="text/javascript">
 	$(document).ready(function(){
-		$.getJSON("/context/album/allalbums", function(data){
+		$.getJSON("/context/album/allImages?albumName=${fn:escapeXml(albumName)}" , function(data){
 			console.log(data.length);
-			$.each(data,function(i, item){
-				$("#list").append(
-						'<div id ="photo" class ="photo" style="width:240px; height:260px;float:left" >'
-						+'<h4  align="center" style="margin-top:2px; margin-bottom:3px">AlbumName: '
-						+item.albumName
-						+'</h4>'
-						+'<a href="gallery.jsp?albumName='
-					    +item.albumName
-					    +'"\>'
-					    +'<img style="padding-top: 0px;padding-left: 20px;width:200px;height:180px" src="'
-					    + item.imageUrl
-					    +'" /><br/>'
-					    + '</a>'
-					    + '<p  align="center" style="margin-top:2px; margin-bottom:3px">'
-					    + item.notes
-					    + '</p> <form action="/context/album/deletealbum?albumName='
-					    + item.albumName
-					    +'" method="post"> <input align="center" type="submit" value="Delete"></form>'
-					    + '</div>'
-						);
-			});
-			$("#list").append(
-					    '<div id="newlink" style="width:240px; height:240px;float:left" >'
-					    + '<h2 style="margin:50px;"> <a href="newalbum.jsp">Add New Album </a>'
-					    + '</h2>'
-					    + '</div>'
-						);
+			$.each(data,function(i, item){ 
+ 		
+ 				$("#slider4").append(
+ 		 				/* 		style="padding-top: 0px;padding-left: 20px;width:200px;height:180px" */
+ 								'<li>'
+ 								+'<img src="'
+ 								+item.imageUrl
+ 								+'" alt=""><p class="caption">This is photos</p></li>'
+ 								); 
+			});	
+			// Slideshow 4
+		      $("#slider4").responsiveSlides({
+		        auto: false,
+		        pager: false,
+		        nav: true,
+		        speed: 500,
+		        namespace: "callbacks",
+		        before: function () {
+		          $('.events').append("<li>before event fired.</li>");
+		        },
+		        after: function () {
+		          $('.events').append("<li>after event fired.</li>");
+		        }
+		      });
 		});
 	});
 </script>
-</body>
+
+<script src="/js/responsiveslides.min.js"></script>
+    
+    </body>
 </html>

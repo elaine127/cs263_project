@@ -39,8 +39,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <!-- Bootstrap core CSS -->
-    <link type="text/css" rel="stylesheet" href="/stylesheets/css/bootstrap.min.css" >
-	<link type="text/css" rel="stylesheet" href="/stylesheets/css/datepicker.css" />
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" >
 	<style>
 		#formpage {clear ="both";}
 	</style>
@@ -111,7 +110,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
       </div>
 </div> 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
- <script src="stylesheets/js/bootstrap.min.js"></script>
+ <script src="/js/bootstrap.min.js"></script>
   
 
 </body>

@@ -18,16 +18,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="description" content="">
     <meta name="author" content="">
-
+   <!--  添加了以下3行 -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ 
     <link rel="icon" href="../../favicon.ico">
 
 
 
     <!-- Bootstrap core CSS -->
-    <link type="text/css" rel="stylesheet" href="/stylesheets/css/bootstrap.min.css" >
-	<link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
-	<link type="text/css" rel="stylesheet" href="/stylesheets/css/datepicker.css" />
-	<style>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" >
+	<link type="text/css" rel="stylesheet" href="/stylesheets/header.css" />
+	
+    <style>
 		#formpage {clear ="both";}
 	</style>
 
@@ -91,7 +95,6 @@
 		return (0 == year % 4 && (year % 100 != 0 || year % 400 == 0))
 	}
 -->
-</script>
 
 
 </head>
@@ -140,7 +143,6 @@
     </nav>
 
    <div class="container">
-
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Record Today</h1>
@@ -148,51 +150,22 @@
     	<div class="formpage" style="position: relative; left: 150px;">
 		<form name="form1" id="submitform" action="/context/enqueue/newrecord" method="post">
 			<fieldset>
-				<!-- <p>Name Your New Record:<input type="text" name="RecordName"></p> -->
-				<p>Enter Your Start Date:</p>
-				<!-- First Name: <input type="text" name="first_name">
-				<br />
-				Last Name: <input type="text" name="last_name" /> -->
+			
+				<label for="inputsm">Enter Your Start Date:</label>
+				<p>Date: <input name=date type="text" id="datepicker"></p>
 				
-				<select name=YYYY onchange="YYYYMM(this.value)">
-						<option value="">Year</option>
-						<option value=1>1</option>
-						<option value=2>2</option>
-						<option value=3>3</option>
-						<option value=4>4</option>
-						<option value=5>5</option>
-						<option value=6>6</option>
-				</select>
-				<select name=MM onchange="MMDD(this.value)">
-						<option value="">Month</option>
-						<option value=1>1</option>
-						<option value=2>2</option>
-						<option value=3>3</option>
-						<option value=4>4</option>
-						<option value=5>5</option>
-						<option value=6>6</option>
-				</select>
-				<select name=DD >
-						<option value="">Day</option>
-						<option value=1>1</option>
-						<option value=2>2</option>
-						<option value=3>3</option>
-						<option value=4>4</option>
-						<option value=5>5</option>
-						<option value=6>6</option>
-				</select> 
-				
-				<p><input type="submit" value="Continue to record details"></p>
+				<button type="submit" class="btn btn-primary btn-sm">Continue to record details</button>
 			</fieldset>
 		</form>
 	</div>
 </div>
       </div>
-
-    </div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="stylesheets/js/bootstrap.min.js"></script>
-    <script src="stylesheets/js/bootstrap-datepicker.js"></script>
-
+    <script src="/js/bootstrap.min.js"></script>
+   
+<script>
+  $(function() {
+    $("#datepicker").datepicker();
+  });
+</script>
 </body>
 </html>

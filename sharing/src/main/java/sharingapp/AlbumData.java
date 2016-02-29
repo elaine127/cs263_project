@@ -9,6 +9,7 @@ public class AlbumData
 private String albumName;
 private String notes;
 private String imageUrl;
+
 public String getAlbumName() {
 	return albumName;
 }
@@ -36,7 +37,6 @@ public AlbumData(String albumName, String notes, String imageUrl) {
 public AlbumData() {
 	super();
 }
-
 
 //add constructors (default () and (String,String,Date))
 

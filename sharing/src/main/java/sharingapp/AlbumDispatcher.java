@@ -60,9 +60,9 @@ public class AlbumDispatcher {
 		return Response.temporaryRedirect(new URI("/addphotos.jsp?albumName="+albumName)).build();
 		
 	}
+	
 	@POST
 	@Path("/upload")
-	
 	public Response newPhoto(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, URISyntaxException, InterruptedException{
 		UserService userService = UserServiceFactory.getUserService();
 		User userName = userService.getCurrentUser();
@@ -83,7 +83,51 @@ public class AlbumDispatcher {
 			return Response.temporaryRedirect(new URI("/addphotos.jsp?albumName="+albumName)).build();		
 	}
 	}
+	@POST
+	@Path("/deletealbum")
+	public void deleteAlbum(@Context HttpServletRequest request,
+			@Context HttpServletResponse response) throws Exception {
+
+		UserService userService = UserServiceFactory.getUserService();
+		User userName = userService.getCurrentUser();
+		Queue queue = QueueFactory.getDefaultQueue();
+		String albumName = request.getParameter("albumName");
+		queue.add(withUrl("/context/albumworker/deletealbum").param(
+				"albumName", albumName).param("userName", userName.toString()));
+		
+		System.out.println("=============delete");
+		Thread.sleep(120);
+		response.sendRedirect("/album.jsp");
+	}
 	
+	@GET
+	@Path("/allImages")
+	public List<ImageData> getAllImages(@Context HttpServletRequest request,
+			@Context HttpServletResponse response) throws Exception{
+		
+		UserService userService = UserServiceFactory.getUserService();
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		ImagesService imagesService = ImagesServiceFactory.getImagesService();
+		
+		User userName = userService.getCurrentUser();
+		Queue queue = QueueFactory.getDefaultQueue();
+		String albumName = request.getParameter("albumName");
+		Key parentKey = KeyFactory.createKey("User", userName.toString());
+		Key albumKey = KeyFactory.createKey(parentKey, "Album", albumName);
+		Entity album = datastore.get(albumKey);
+		
+		List<BlobKey> list = (List<BlobKey>) album.getProperty("list");
+		List<ImageData> li = new ArrayList<ImageData>();
+		String imageUrl = null;
+		for(int i =0; i < list.size(); i++){
+			BlobKey blobKey = list.get(i);
+			imageUrl = imagesService.getServingUrl(blobKey);
+			ImageData image = new ImageData(albumName, imageUrl);
+			li.add(image);
+		}
+		return li;
+	
+	}
 
 	@GET
 	@Path("/allalbums")

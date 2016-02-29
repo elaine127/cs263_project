@@ -38,10 +38,9 @@
     <meta name="author" content="">
 
     <link rel="icon" href="../../favicon.ico">
-    <link type="text/css" rel="stylesheet" href="/stylesheets/css/bootstrap.min.css" >
-	<link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
-	<link type="text/css" rel="stylesheet" href="/stylesheets/css/datepicker.css" />
-	<!-- <link type="text/css" rel="stylesheet" href="/stylesheets/innerNav.css" />
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" >
+<!-- 	<link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
+ -->	<!-- <link type="text/css" rel="stylesheet" href="/stylesheets/innerNav.css" />
 	 -->
 
 	<style>

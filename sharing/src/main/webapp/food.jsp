@@ -51,12 +51,11 @@
     <link rel="icon" href="../../favicon.ico">
     
     
-	<link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
-	<link type="text/css" rel="stylesheet" href="/stylesheets/css/datepicker.css" />
-	<!-- <link type="text/css" rel="stylesheet" href="/stylesheets/innerNav.css" /> -->
-	<link href="stylesheets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-   
+	<!-- <link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
+		<link type="text/css" rel="stylesheet" href="/stylesheets/innerNav.css" />
+ -->	<link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+<!--     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    -->
 	
     <style>
 		#formpage {clear ="both";}
@@ -122,55 +121,49 @@
     </nav> 
 
 	<div class="container">
-      <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
       <h1>Today's Record</h1>
- 
- 
-
        <ul class="nav nav-tabs">
   		<li class="active"><a href="food.jsp?date=${fn:escapeXml(date)}">Food</a></li>
   		<li ><a href="exerise.jsp?date=${fn:escapeXml(date)}">Exerise</a></li>
   		<li ><a href="weight.jsp?date=${fn:escapeXml(date)}">Weight </a></li>
 	   </ul>
-	   
-<div class="body">
+	  </div> 
+	    
+	<div class = "col-xs-6">
  	<div class="leftbody">
- 	<h3>HOME</h3>
-    <p>Some content.</p>
-    <fieldset style="margin-left: 8px; margin-right: 2px">
+ 	<h3>Please enter your food details:</h3>
+    <fieldset class="col-xs-6" style="margin-left: 8px; margin-right: 2px">
 				<form id ="submitform1" name="form1" action="/context/enqueue/newfood/?date=${fn:escapeXml(date)}" method="post">
-					<p>Please enter your food details:</p>
-					<div>
-						<p>Breakfast</p>
-						<select name="breakfast">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-						</select>
-						<p>Lunch</p>
-						<select name="lunch">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-						</select>
-						<p>Dinner</p>
-						<select name="dinner">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-						</select>
-						
+					<div class="row">
+					<div class="col-xs-6">
+						<label for="inputsm">Breakfast</label>
+						<input class="form-control input-sm" name="breakfast" type="text">	
 					</div>
-					<!-- <p>Notes:<input type="text" name="notes" style="width: 90%"></p> -->
-					<p><input type="submit" value="Submit"></p>
+					</div>
+					
+					<div class="row">
+					<div class="col-xs-6">
+						<label for="inputsm">Lunch</label>
+						<input class="form-control input-sm" name="lunch" type="text">	
+					</div>
+					</div>
+					
+					<div class="row">
+					<div class="col-xs-6">
+						<label for="inputsm">Dinner</label>
+						<input class="form-control input-sm" name="dinner" type="text">	
+					</div>
+					</div>		
+			
+					<!-- <p><input type="submit" value="Submit"></p> -->
+				    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
 				</form>
 	</fieldset>
 	</div>
+	</div>
 	
+	<div class ="col-xs-6">
 	<div class="rightbody">
 		<h3>Plan Summary(start at ${fn:escapeXml(date)}):</h3>
 		<%
@@ -207,15 +200,11 @@
 		<%
 			if(syncCache.get(exeriseKey) != null ){
 				Entity e = (Entity)syncCache.get(exeriseKey);
-				String exerise1 = (String)e.getProperty("exerise1");
-				String exerise2 = (String)e.getProperty("exerise2");
-				String exerise3 = (String)e.getProperty("exerise3");
-				pageContext.setAttribute("exerise1", exerise1);
-				pageContext.setAttribute("exerise2", exerise2);
-				pageContext.setAttribute("exerise3", exerise3);
-			
+				String exerise = (String)e.getProperty("exerise");
+				pageContext.setAttribute("exerise", exerise);
+				
 		%>
-		<p>exerise1:${fn:escapeXml(exerise1)}; exerise2:${fn:escapeXml(exerise2)}; exerise3:${fn:escapeXml(exerise3)}</p>
+		<p>exerise:${fn:escapeXml(exerise)}</p>
 
 		<% 
 		}else{
@@ -224,15 +213,11 @@
 				PreparedQuery pq = datastore.prepare(q);
 				
 				for(Entity result: pq.asIterable()){
-					String exerise1 = (String)result.getProperty("exerise1");
-					String exerise2 = (String)result.getProperty("exerise2");
-					String exerise3 = (String)result.getProperty("exerise3");
-					pageContext.setAttribute("exerise1", exerise1);
-					pageContext.setAttribute("exerise2", exerise2);
-					pageContext.setAttribute("exerise3", exerise3);
-				}
+					String exerise = (String)result.getProperty("exerise");
+					pageContext.setAttribute("exerise", exerise);
+					}
 		%>
-		<p>exerise1:${fn:escapeXml(exerise1)}; exerise2:${fn:escapeXml(exerise2)}; exerise3:${fn:escapeXml(exerise3)}</p>
+		<p>exercise:${fn:escapeXml(exerise)}</p>
 		<%
 			}
 		%>
@@ -261,14 +246,12 @@
 			}
 		%>
 	</div>
+	</div>
+	
 </div>
-	  </div>
-	  </div>
-	   
-
-  
+	 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
- <script src="stylesheets/js/bootstrap.min.js"></script>
+ <script src="/js/bootstrap.min.js"></script>
     	
 		
 </body>

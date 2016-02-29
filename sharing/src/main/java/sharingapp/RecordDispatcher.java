@@ -35,12 +35,12 @@ public class RecordDispatcher {
 	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Consumes("application/x-www-form-urlencoded")
 //	@FormParam("planName") String planName,,
-	public Response newRecord(@FormParam("YYYY") String yyyy, @FormParam("MM") String mm,@FormParam("DD") String dd,
-			 @Context HttpServletResponse response) throws IOException, URISyntaxException
+	public Response newRecord(@FormParam("date") String dt, @Context HttpServletResponse response) throws IOException, URISyntaxException
 			 {
 		UserService userService = UserServiceFactory.getUserService();
 		User userName = userService.getCurrentUser();
-		String date = yyyy + "-" + mm + "-" + dd;
+//		String date = yyyy + "-" + mm + "-" + dd;
+		String date = dt;
 		Queue queue = QueueFactory.getDefaultQueue();
 		queue.add(withUrl("/context/recordworker/createrecord").param("date", date).param("userName", userName.toString()));
 		return Response.temporaryRedirect(new URI("/food.jsp?date=" + date)).build();
@@ -61,12 +61,12 @@ public class RecordDispatcher {
 	@POST
 	@Path("/newexerise")
 	@Consumes("application/x-www-form-urlencoded")
-	public Response newExerise(@FormParam("exerise1") String exerise1, @FormParam("exerise2") String exerise2, @FormParam("exerise3") String exerise3, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, URISyntaxException{
+	public Response newExerise1(@FormParam("exerise") String exerise, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, URISyntaxException{
 		UserService userService = UserServiceFactory.getUserService();
 		User userName = userService.getCurrentUser();
 		String date = request.getParameter("date");
 		Queue queue = QueueFactory.getDefaultQueue();
-		queue.add(withUrl("/context/exeriseworker/createexerise").param("exerise1", exerise1).param("exerise2", exerise2).param("exerise3", exerise3).param("date", date).param("userName", userName.toString()));
+		queue.add(withUrl("/context/exeriseworker/createexerise").param("exerise", exerise).param("date", date).param("userName", userName.toString()));
 		return Response.temporaryRedirect(new URI("/exerise.jsp?date=" + date)).build();
 		
 	}

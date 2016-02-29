@@ -36,8 +36,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <!-- Bootstrap core CSS -->
-    <link type="text/css" rel="stylesheet" href="/stylesheets/css/bootstrap.min.css" >
-	<link type="text/css" rel="stylesheet" href="/stylesheets/css/datepicker.css" />
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" >
 	<style>
 		#formpage {clear ="both";}
 	</style>

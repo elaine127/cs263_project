@@ -38,13 +38,10 @@
     <meta name="author" content="">
 
     <link rel="icon" href="../../favicon.ico">
-    <link type="text/css" rel="stylesheet" href="/stylesheets/css/bootstrap.min.css" >
-	<link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
-	<link type="text/css" rel="stylesheet" href="/stylesheets/css/datepicker.css" />
-	<!-- <link type="text/css" rel="stylesheet" href="/stylesheets/innerNav.css" />
-	 -->
-
-	<style>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" >
+	<!-- <link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
+	
+ -->	<style>
 		#formpage {clear ="both";}
 	</style>
 
@@ -116,43 +113,26 @@
   		<li class="active"><a href="exerise.jsp?date=${fn:escapeXml(date)}">Exerise</a></li>
   		<li ><a href="weight.jsp?date=${fn:escapeXml(date)}">Weight </a></li>
 	   </ul>
+	   </div> 
 	   
-<div class="body">
+	<div class = "col-xs-6">
  	<div class="leftbody">
-    <h3>HOME</h3>
-    <p>Some content.</p>
+  	<h3>Please enter your exercise details:</h3>
     <fieldset style="margin-left: 8px; margin-right: 2px">
 				<form id ="submitform1" name="form1" action="/context/enqueue/newexerise/?date=${fn:escapeXml(date)}" method="post">
-					<p>Please enter your food details:</p>
-					<div>
-						<p>Exerise1</p>
-						<select name="exerise1">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-						</select>
-						<p>Exerise2</p>
-						<select name="exerise2">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-						</select>
-						<p>Exerise3</p>
-						<select name="exerise3">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-						</select>
-						
+					<div class="row">
+					<div class="col-xs-6">
+						<label for="inputsm">Exercise</label>
+						<input class="form-control input-sm" name="exerise" type="text">	
 					</div>
-					<!-- <p>Notes:<input type="text" name="notes" style="width: 90%"></p> -->
-					<p><input type="submit" value="Submit"></p>
+					</div>
+					<button type="submit" class="btn btn-primary btn-sm">Submit</button>
 				</form>
 	</fieldset>
   	</div>
+  	</div>
+  	
+  	<div class ="col-xs-6">
   	<div class="rightbody">
 		<h3>Plan Summary(start at ${fn:escapeXml(date)}):</h3>
 		<%
@@ -187,15 +167,11 @@
 			}
 			if(syncCache.get(exeriseKey) != null ){
 				Entity e = (Entity)syncCache.get(exeriseKey);
-				String exerise1 = (String)e.getProperty("exerise1");
-				String exerise2 = (String)e.getProperty("exerise2");
-				String exerise3 = (String)e.getProperty("exerise3");
-				pageContext.setAttribute("exerise1", exerise1);
-				pageContext.setAttribute("exerise2", exerise2);
-				pageContext.setAttribute("exerise3", exerise3);
+				String exerise = (String)e.getProperty("exerise");
+				pageContext.setAttribute("exerise", exerise);
 			
 		%>
-		<p>exerise1:${fn:escapeXml(exerise1)}; exerise2:${fn:escapeXml(exerise2)}; exerise3:${fn:escapeXml(exerise3)}</p>
+		<p>exerise:${fn:escapeXml(exerise)}</p>
 
 		<% 
 		}else{
@@ -204,15 +180,12 @@
 				PreparedQuery pq = datastore.prepare(q);
 				
 				for(Entity result: pq.asIterable()){
-					String exerise1 = (String)result.getProperty("exerise1");
-					String exerise2 = (String)result.getProperty("exerise2");
-					String exerise3 = (String)result.getProperty("exerise3");
-					pageContext.setAttribute("exerise1", exerise1);
-					pageContext.setAttribute("exerise2", exerise2);
-					pageContext.setAttribute("exerise3", exerise3);
+					String exerise = (String)result.getProperty("exerise");
+					pageContext.setAttribute("exerise", exerise);
+					
 				}
 		%>
-		<p>exerise1:${fn:escapeXml(exerise1)}; exerise2:${fn:escapeXml(exerise2)}; exerise3:${fn:escapeXml(exerise3)}</p>
+		<p>exercise:${fn:escapeXml(exerise)}</p>
 		<%
 			}
 		%>
@@ -240,10 +213,10 @@
 			}
 		%>
 	</div>
-  	 
+  	</div>
   	</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
- <script src="stylesheets/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
