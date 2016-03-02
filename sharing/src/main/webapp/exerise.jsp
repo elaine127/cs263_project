@@ -123,7 +123,8 @@
 					<div class="row">
 					<div class="col-xs-6">
 						<label for="inputsm">Exercise</label>
-						<input class="form-control input-sm" name="exerise" type="text">	
+						<textarea class="form-control" rows="3" name="exerise"></textarea>	
+						
 					</div>
 					</div>
 					<button type="submit" class="btn btn-primary btn-sm">Submit</button>
@@ -134,7 +135,7 @@
   	
   	<div class ="col-xs-6">
   	<div class="rightbody">
-		<h3>Plan Summary(start at ${fn:escapeXml(date)}):</h3>
+		<h3>Plan Summary(Date at ${fn:escapeXml(date)}):</h3>
 		<%
 			MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
 			if(syncCache.get(foodKey) != null ){
@@ -146,7 +147,16 @@
 				pageContext.setAttribute("lunch", lunch);
 				pageContext.setAttribute("dinner", dinner);
 		%>
-		<p>breakfast:${fn:escapeXml(breakfast)}; lunch:${fn:escapeXml(lunch)}; dinner:${fn:escapeXml(dinner)}</p>
+		<div class="col-xs-2">
+		 <dl>
+    		<dt>breakfast</dt>
+    		<dd>- ${fn:escapeXml(breakfast)}</dd>
+    		<dt>lunch</dt>
+   			<dd>- ${fn:escapeXml(lunch)}</dd>
+   			<dt>dinner</dt>
+   			<dd>- ${fn:escapeXml(dinner)}</dd>
+  		</dl> 
+  		</div>
 		<% 
 			}else{
 				DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -162,7 +172,16 @@
 					pageContext.setAttribute("dinner", dinner);
 				}
 		%>
-		<p>breakfast:${fn:escapeXml(breakfast)}; lunch:${fn:escapeXml(lunch)}; dinner:${fn:escapeXml(dinner)}</p>
+		<div class="col-xs-2">
+		 <dl>
+    		<dt>breakfast</dt>
+    		<dd>- ${fn:escapeXml(breakfast)}</dd>
+    		<dt>lunch</dt>
+   			<dd>- ${fn:escapeXml(lunch)}</dd>
+   			<dt>dinner</dt>
+   			<dd>- ${fn:escapeXml(dinner)}</dd>
+  		</dl> 
+  		</div>
 		<%
 			}
 			if(syncCache.get(exeriseKey) != null ){
@@ -171,8 +190,14 @@
 				pageContext.setAttribute("exerise", exerise);
 			
 		%>
-		<p>exerise:${fn:escapeXml(exerise)}</p>
-
+		
+		<div class="col-xs-2">
+	    <dl>
+    		<dt>Exercise</dt>
+    		<dd>- ${fn:escapeXml(exerise)}</dd>
+  		</dl>
+  		</div>
+  		
 		<% 
 		}else{
 				DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -185,7 +210,14 @@
 					
 				}
 		%>
-		<p>exercise:${fn:escapeXml(exerise)}</p>
+		
+		<div class="col-xs-2">
+	    <dl>
+    		<dt>Exercise</dt>
+    		<dd>- ${fn:escapeXml(exerise)}</dd>
+  		</dl>
+  		</div>
+		
 		<%
 			}
 		%>
@@ -195,8 +227,13 @@
 				String weight = (String)e.getProperty("weight");
 				pageContext.setAttribute("weight", weight);
 		%>
-		<p>weight:${fn:escapeXml(weight)}</p>
-
+		<div class="col-xs-2">
+	    <dl>
+    		<dt>Weight</dt>
+    		<dd>- ${fn:escapeXml(weight)}</dd>
+  		</dl>
+  		</div>
+		
 		<% 
 		}else{
 				DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -208,7 +245,13 @@
 					pageContext.setAttribute("weight", weight);
 				}
 		%>
-		<p>weight:${fn:escapeXml(weight)}</p>
+		<div class="col-xs-2">
+	    <dl>
+    		<dt>Weight</dt>
+    		<dd>- ${fn:escapeXml(weight)}</dd>
+  		</dl>
+  		</div>
+
 		<%
 			}
 		%>

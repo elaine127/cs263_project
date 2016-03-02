@@ -89,7 +89,7 @@
               <ul class="dropdown-menu">
                 <li><a href="newrecord.jsp">Record Today</a></li>
                 <li><a href="allrecords.jsp">Record History</a></li>
-                <li><a href="#">My plan</a></li>
+                <li><a href="album.jsp">My Album</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Nav header</li>
                 <li><a href="#">Separated link</a></li>
@@ -109,6 +109,7 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
       <h1 align="center">My RecordList:</h1>
+      </div>
      <%
      MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -136,30 +137,47 @@
 				
 			}
 	 %>
-	 <li><a href="food.jsp?date=${fn:escapeXml(date)}">update food</a></li>
-	 <li><a href="exerise.jsp?date=${fn:escapeXml(date)}">update exerise</a></li>
-	 <li><a href="weight.jsp?date=${fn:escapeXml(date)}">update weight</a></li>
-	 
+	<div class = "col-xs-6">
+ 	<div class="leftbody">
+	 	
+	
+	<div class="col-xs-2">
+		 <dl>
+    		<dt>breakfast</dt>
+    		<dd>- ${fn:escapeXml(breakfast)}</dd>
+    		<dt>lunch</dt>
+   			<dd>- ${fn:escapeXml(lunch)}</dd>
+   			<dt>dinner</dt>
+   			<dd>- ${fn:escapeXml(dinner)}</dd>
+  		</dl> 
+  		</div>
+	<div class="col-xs-2">
+	    <dl>
+    		<dt>Exercise</dt>
+    		<dd>- ${fn:escapeXml(exerise)}</dd>
+  		</dl>
+  		</div>
+	<div class="col-xs-2">
+	    <dl>
+    		<dt>Weight</dt>
+    		<dd>- ${fn:escapeXml(weight)}</dd>
+  		</dl>
+  		</div>	
+  		
+	 </div>
+	 </div>
 	 <% 
 	 if(syncCache.get(exeriseKey) != null ){
 			Entity e = (Entity)syncCache.get(exeriseKey);
-			String exerise1 = (String)e.getProperty("exerise1");
-			String exerise2 = (String)e.getProperty("exerise2");
-			String exerise3 = (String)e.getProperty("exerise3");
-			pageContext.setAttribute("exerise1", exerise1);
-			pageContext.setAttribute("exerise2", exerise2);
-			pageContext.setAttribute("exerise3", exerise3);
+			String exerise = (String)e.getProperty("exerise");
+			pageContext.setAttribute("exerise", exerise);
 	 }else{
 		    Query q2 = new Query("exerise").setAncestor(dateKey);
 			PreparedQuery pq2 = datastore.prepare(q2);
 			for(Entity result: pq2.asIterable()){
-				String exerise1 = (String)result.getProperty("exerise1");
-				String exerise2 = (String)result.getProperty("exerise2");
-				String exerise3 = (String)result.getProperty("exerise3");
-				pageContext.setAttribute("exerise1", exerise1);
-				pageContext.setAttribute("exerise2", exerise2);
-				pageContext.setAttribute("exerise3", exerise3);
-			}
+				String exerise = (String)result.getProperty("exerise");
+				pageContext.setAttribute("exerise", exerise);
+				}
 	 }
 	 if(syncCache.get(weightKey) != null ){
 			Entity e = (Entity)syncCache.get(weightKey);
@@ -175,12 +193,18 @@
 			}
 	
      %>
-     <p>breakfast:${fn:escapeXml(breakfast)}; lunch:${fn:escapeXml(lunch)}; dinner:${fn:escapeXml(dinner)}</p>
-	 <p>exerise1:${fn:escapeXml(exerise1)}; exerise2:${fn:escapeXml(exerise2)}; exerise3:${fn:escapeXml(exerise3)}</p>
-	 <p>weight:${fn:escapeXml(weight)}</p>
-      </div>
-</div>
+    <div class ="col-xs-6">
+	<div class="leftbody">
+	
+	
+	<li><a href="food.jsp?date=${fn:escapeXml(date)}">update food</a></li>
+	 <li><a href="exerise.jsp?date=${fn:escapeXml(date)}">update exerise</a></li>
+	 <li><a href="weight.jsp?date=${fn:escapeXml(date)}">update weight</a></li>
 
+   </div>
+   </div>
+   </div>
+   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 

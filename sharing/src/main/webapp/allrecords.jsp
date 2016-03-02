@@ -90,6 +90,7 @@
       <div class="jumbotron">
       
       <h1 align="center">Record History:</h1>
+
       <%
       	DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
       	pageContext.setAttribute("userName", userName.toString());
@@ -101,11 +102,19 @@
       		String date = (String)e.getProperty("date");
       		pageContext.setAttribute("date", date);
       %>
+      
       <div>
       	<form action="/context/enqueue/deleterecord?date=${fn:escapeXml(date)}" method="post">
       	<h1>
-      		<a href ="plandetails.jsp?date=${fn:escapeXml(date)}">${fn:escapeXml(date)}</a>
-      		<input type="submit" value="Delete This Plan">
+      	<div class="row">
+  			<div class="col-md-6">
+  			<font size="33"><a href ="plandetails.jsp?date=${fn:escapeXml(date)}">${fn:escapeXml(date)}</a>
+  			</font>
+  			</div>
+  			<div class="col-md-4">
+  			<button type="submit" class="btn btn-primary btn-lg">Delete This Plan</button>
+  			</div>
+		</div>
       	</h1>
       	</form>
       </div>

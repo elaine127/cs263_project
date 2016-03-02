@@ -97,11 +97,25 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
       <form id="submitform" name='form1' action='/context/album/newalbum' method='post'>
-		<p>Name Your New Album:<input type="text" name="albumName"></p>
-		<p>Notes about this album:<input type="text" name="notes"></p>
-		<p><input type="submit" value="Submit"></p>
+      	<label for="inputsm">Name Your New Album</label>
+      	<div class="row">
+      	<div class="col-xs-12">
+      	<input  type="text" name="albumName"></input>	
+		</div>
+		</div>
+		<label for="inputsm">Notes about this Album</label>
+		<div class="row">
+		<div class="col-xs-12">
+		
+		<input type="text" name="notes"></input>	
+		</div>			
+		</div>
+      	<button type="submit" class="btn btn-primary btn-sm">Submit</button>
 	  </form>
       </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
 </body>
 </html>
