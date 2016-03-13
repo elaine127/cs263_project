@@ -137,6 +137,7 @@
 				
 			}
 	 %>
+	<div class = "row">
 	<div class = "col-xs-6">
  	<div class="leftbody">
 	 	
@@ -162,8 +163,7 @@
     		<dt>Weight</dt>
     		<dd>- ${fn:escapeXml(weight)}</dd>
   		</dl>
-  		</div>	
-  		
+  		</div>		
 	 </div>
 	 </div>
 	 <% 
@@ -205,6 +205,11 @@
    </div>
    </div>
    
+<!--   	<div>
+  		<button type="submit" class="btn btn-primary btn-sm">Click to send to my email</button>
+  	</div> -->
+  	
+   </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 

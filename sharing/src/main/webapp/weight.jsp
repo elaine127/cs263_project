@@ -137,7 +137,11 @@
 						
 					</div>
 					</div>
-					
+					<div class ="row" >
+					<div class="col-xs-6">
+						<label>Send Reminder Email: <input type="checkbox" name="notice" /></label>
+					</div>
+					</div>
 					<button type="submit" class="btn btn-primary btn-sm">Submit</button>
 				</form>
 	</fieldset>

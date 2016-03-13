@@ -74,12 +74,22 @@ public class RecordDispatcher {
 	@POST
 	@Path("/newweight")
 	@Consumes("application/x-www-form-urlencoded")
-	public Response newExerise(@FormParam("weight") String weight, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, URISyntaxException{
+	public Response newExerise(
+			@FormParam("weight") String weight, 
+			@FormParam("notice") String notice,
+			@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, URISyntaxException{
 		UserService userService = UserServiceFactory.getUserService();
 		User userName = userService.getCurrentUser();
 		String date = request.getParameter("date");
 		Queue queue = QueueFactory.getDefaultQueue();
 		queue.add(withUrl("/context/weightworker/createweight").param("weight", weight).param("date", date).param("userName", userName.toString()));
+		if(notice != null && notice.equals("on")){
+				queue.add(withUrl("/context/mailworker/mail")
+					.param("userName",userName.toString())
+					.param("weight", weight)
+					.param("date", date)
+					);
+		}
 		return Response.temporaryRedirect(new URI("/weight.jsp?date=" + date)).build();
 		
 	}
