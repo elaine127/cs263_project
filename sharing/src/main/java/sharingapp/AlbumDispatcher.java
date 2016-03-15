@@ -2,7 +2,6 @@ package sharingapp;
 
 import static com.google.appengine.api.taskqueue.TaskOptions.Builder.withUrl;
 
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -19,18 +17,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.google.appengine.api.taskqueue.Queue;
-import com.google.appengine.api.taskqueue.QueueFactory;
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
-import com.google.appengine.api.blobstore.FileInfo;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -38,11 +29,13 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.Filter;
-import com.google.appengine.api.datastore.Query.FilterOperator;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 @Path("/album")
 public class AlbumDispatcher {
@@ -80,9 +73,36 @@ public class AlbumDispatcher {
 				Thread.sleep(100);
 			}
 			
-			return Response.temporaryRedirect(new URI("/addphotos.jsp?albumName="+albumName)).build();		
+//			return Response.temporaryRedirect(new URI("/addphotos.jsp?albumName="+albumName)).build();	
+			return Response.temporaryRedirect(new URI("/album.jsp")).build();		
+	    }
 	}
+	@POST
+	@Path("/deletephoto")
+	public void deletePhoto(@Context HttpServletRequest request,
+			@Context HttpServletResponse response) throws Exception{
+		UserService userService = UserServiceFactory.getUserService();
+		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		
+		String albumName = request.getParameter("albumName");
+		String blobKey = request.getParameter("blobKey");
+		BlobKey k = new BlobKey(blobKey);
+		
+		User userName = userService.getCurrentUser();
+		
+		Key parentKey = KeyFactory.createKey("User", userName.toString());
+		Key albumKey = KeyFactory.createKey(parentKey, "Album", albumName);
+		Entity album = datastore.get(albumKey);
+		List<String>list = (List<String>) album.getProperty("list");
+		if(list.contains(k))
+			list.remove(k);
+		album.setProperty("list", list);
+		datastore.put(album);
+		
+		blobstoreService.delete(k);		
 	}
+	
 	@POST
 	@Path("/deletealbum")
 	public void deleteAlbum(@Context HttpServletRequest request,
@@ -97,7 +117,7 @@ public class AlbumDispatcher {
 		
 		System.out.println("=============delete");
 		Thread.sleep(120);
-		response.sendRedirect("/album.jsp");
+		((HttpServletResponse) response).sendRedirect("/album.jsp");
 	}
 	
 	@GET
@@ -111,18 +131,19 @@ public class AlbumDispatcher {
 		
 		User userName = userService.getCurrentUser();
 		Queue queue = QueueFactory.getDefaultQueue();
+		
 		String albumName = request.getParameter("albumName");
 		Key parentKey = KeyFactory.createKey("User", userName.toString());
 		Key albumKey = KeyFactory.createKey(parentKey, "Album", albumName);
 		Entity album = datastore.get(albumKey);
-		
+		System.out.println("helloo");
 		List<BlobKey> list = (List<BlobKey>) album.getProperty("list");
 		List<ImageData> li = new ArrayList<ImageData>();
 		String imageUrl = null;
 		for(int i =0; i < list.size(); i++){
 			BlobKey blobKey = list.get(i);
 			imageUrl = imagesService.getServingUrl(blobKey);
-			ImageData image = new ImageData(albumName, imageUrl);
+			ImageData image = new ImageData(albumName, imageUrl, blobKey.getKeyString());
 			li.add(image);
 		}
 		return li;

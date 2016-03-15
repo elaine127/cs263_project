@@ -118,7 +118,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="welcome.jsp">Home</a></li>
+            <li><a href="welcome.jsp">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
                         <li class="dropdown">
@@ -146,7 +146,7 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Record Today</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <p>Start record. From now, keep a record for the food, exercise, and weight.</p>
     	<div class="formpage" style="position: relative; left: 150px;">
 		<form name="form1" id="submitform" action="/context/enqueue/newrecord" method="post">
 			<fieldset>

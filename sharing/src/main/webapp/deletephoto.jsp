@@ -20,24 +20,43 @@
 <%@ page import="com.google.appengine.api.datastore.Query.FilterPredicate"%>
 <%@ page import="com.google.appengine.api.datastore.Query.FilterOperator"%>
 
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory"%>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService"%>
+
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>ResponsiveSlides.js &middot; Responsive jQuery slideshow</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  
-  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" >
+<title>Insert title here</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
     
-  <link rel="stylesheet" href="/stylesheets/demo.css">
-  
-<!--   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    
+	<!-- <link type="text/css" rel="stylesheet" href="/stylesheets/css/header.css" />
+		<link type="text/css" rel="stylesheet" href="/stylesheets/innerNav.css" />
+ -->	<link href="stylesheets/bootstrap.css" rel="stylesheet">
+<!--     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    -->
+	<!--   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
  -->  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-   
-</head>
+  
+    <style>
+		#formpage {clear ="both";}
+	</style>
 
+
+</head>
 <body>
 <%
 UserService userService = UserServiceFactory.getUserService();
@@ -47,6 +66,7 @@ String albumName = request.getParameter("albumName");
 pageContext.setAttribute("albumName", albumName);
 Key parentKey = KeyFactory.createKey("User", userName);
 %>
+
 <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -82,56 +102,31 @@ Key parentKey = KeyFactory.createKey("User", userName);
            </div>
       </div>
 </nav>
-<div id="wrapper">
-    <h1>${fn:escapeXml(albumName)}</h1>
-    <h2 align="center"> 
-    <font size="4px"> <a href="addphotos.jsp?albumName=${fn:escapeXml(albumName)}">Add photos </a>&nbsp;&nbsp;<a href="deletephoto.jsp?albumName=${fn:escapeXml(albumName)}"> Delete photos </a>
-    </font>
-	</h2>
 
-    <!-- Slideshow 4 -->
-    <div class="callbacks_container">
-      <ul class="rslides" id="slider4">
- 
-      </ul>
-    </div>
-  <!--    <ul class="events">
-      <li><h3>Example 4 callback events</h3></li>
-    </ul> -->
-    </div>
-     
  <script type="text/javascript">
 	$(document).ready(function(){
 		$.getJSON("/context/album/allImages?albumName=${fn:escapeXml(albumName)}" , function(data){
 			$.each(data,function(i, item){ 
- 		
- 				$("#slider4").append(
+				console.log(data.length);
+ 				$("#list").append(
  		 				/* 		style="padding-top: 0px;padding-left: 20px;width:200px;height:180px" */
- 								'<li>'
- 								+'<img src="'
+ 		 						
+ 								'<div id ="photo" class ="photo" style="width:240px; height:240px;float:left" >'
+ 								+'<img  style="padding-top: 10px;padding-left: 20px;width:230px;height:180px" src="'
  								+item.imageUrl
- 								+'" alt=""></li>'
- 								); 
+ 								+'" /><br/><form action = "/context/album/deletephoto?albumName=${fn:escapeXml(albumName)}&blobKey='
+ 							    +item.blobKey
+ 							    +'" method ="POST"> <input class="btn btn-info" type="submit" style="display: block; margin: 0 auto;" value="delete" /></form></div>'
+ 							    );
 			});	
-			// Slideshow 4
-		      $("#slider4").responsiveSlides({
-		        auto: false,
-		        pager: false,
-		        nav: true,
-		        speed: 500,
-		        namespace: "callbacks",
-		        before: function () {
-		          $('.events').append("<li>before event fired.</li>");
-		        },
-		        after: function () {
-		          $('.events').append("<li>after event fired.</li>");
-		        }
-		      });
-		});
+ 							
+			});
 	});
-</script>
-
+		
+ </script>
+<div id="list">
+<!-- <h1>hello</h2> -->
+</div>
 <script src="/js/responsiveslides.min.js"></script>
-    
-    </body>
+</body>
 </html>

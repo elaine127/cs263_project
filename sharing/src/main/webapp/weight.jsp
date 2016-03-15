@@ -131,8 +131,14 @@
 					<div class="row">
 					<div class="col-xs-2">
 						<label for="inputsm">Weight</label>
-						<div>
-						<input class="form-control input-sm" name="weight" type="text"><p>kg</p>
+						<div class="row">
+						<div class="col-xs-2">
+						<input class="form-control input-sm" name="weight" type="text">
+						</div>
+						<div class="col-xs-2">
+						kg  
+						</div>
+						
 						</div>
 						
 					</div>

@@ -5,6 +5,7 @@ import java.util.*;
 public class ImageData{
 	private String albumName;
 	private String imageUrl;
+	private String blobKey;
 	public String getAlbumName() {
 		return albumName;
 	}
@@ -17,10 +18,19 @@ public class ImageData{
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-	public ImageData(String albumName, String imageUrl) {
+	
+	public String getBlobKey() {
+		return blobKey;
+	}
+	public void setBlobKey(String blobKey) {
+		this.blobKey = blobKey;
+	}
+	
+	public ImageData(String albumName, String imageUrl, String blobKey) {
 		super();
 		this.albumName = albumName;
 		this.imageUrl = imageUrl;
+		this.blobKey = blobKey;
 	}
 	public ImageData() {
 		super();

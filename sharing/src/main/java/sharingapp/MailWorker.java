@@ -34,16 +34,20 @@ public class MailWorker{
 	    
 		Session session = Session.getDefaultInstance(props, null);
 
-		String msgBody = "Dear Customer,\n\n We are sending you this email to report your daily weight."
+		String msgBody = "Dear Customer,\n We are sending you this email to report your daily weight."
 				+ "\nThe Date is: "
 				+ request.getParameter("date")
 				+ "\nYour daily weight is: "
 				+ request.getParameter("weight")
+				+"kg"
 				+ "\n"
 				+ "\n\n"
-				+ "Thank you!";
+				+ "Thank you!"
+				+ "\n"
+				+ "HealthDairy.com";
+		
 		String userName = request.getParameter("userName");
-		System.out.println("hello");
+		
 		try{
 			Message msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress(from));

@@ -17,7 +17,7 @@ body {
 
 h1 {
   font: 40px/60px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #fff;
+  color: #333;
   font-weight: 200;
   }
 
@@ -90,7 +90,7 @@ p,h3,h4,pre {
   }
 
 a {
-  color: #fff;
+  color: #337ab7;
   text-decoration: none;
   }
 

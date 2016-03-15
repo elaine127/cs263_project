@@ -76,7 +76,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
               <ul class="dropdown-menu">
                 <li><a href="newrecord.jsp">Record Today</a></li>
                 <li><a href="allrecords.jsp">Record History</a></li>
-                <li><a href="album.jsp">My Album</a></li>
+                <li><a href="album.jsp">My Albums</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Nav header</li>
                 <li><a href="#">Separated link</a></li>
@@ -94,7 +94,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
 <div class="container">
       <!-- Main component for a primary marketing message or call to action -->
       <div  class="jumbotron">
-      <a>Album Display</a>
+      <h1>My Albums</h1>
       </div>
       <div class="es-carousel">
      	 <ul id="list">
@@ -117,7 +117,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
 						+'<a href="gallery.jsp?albumName='
 					    +item.albumName
 					    +'"\>'
-					    +'<img style="padding-top: 0px;padding-left: 20px;width:200px;height:180px" src="'
+					    +'<img style="padding-top: 0px;padding-left: 20px;width:230px;height:180px" src="'
 					    + item.imageUrl
 					    +'" /><br/>'
 					    + '</a>'
@@ -125,7 +125,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
 					    + item.notes
 					    + '</p> <form action="/context/album/deletealbum?albumName='
 					    + item.albumName
-					    +'" method="post"> <input align="center" type="submit" value="Delete"></form>'
+					    +'" method="post"> <input class="btn btn-info" type="submit" style="display: block; margin: 0 auto;" value="delete"></form>'
 					    + '</div>'
 						);
 			});

@@ -96,7 +96,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
          <ul class="nav navbar-nav">
-            <li class="active"><a href="welcome.jsp">Home</a></li>
+            <li><a href="welcome.jsp">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
                         <li class="dropdown">
@@ -104,7 +104,7 @@
               <ul class="dropdown-menu">
                 <li><a href="newrecord.jsp">Record Today</a></li>
                 <li><a href="allrecords.jsp">Record History</a></li>
-                <li><a href="album.jsp">My Album</a></li>
+                <li><a href="album.jsp">My Albums</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Nav header</li>
                 <li><a href="#">Separated link</a></li>
