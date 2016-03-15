@@ -21,12 +21,13 @@
 <%@ page import="com.google.appengine.api.datastore.Query.FilterOperator"%>
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>ResponsiveSlides.js &middot; Responsive jQuery slideshow</title>
+  <title></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
   <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" >
@@ -63,7 +64,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
             <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
-            <li class="dropdown" class="active"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menue <span class="caret"></span></a>
+            <li class="dropdown" class="active"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="newrecord.jsp">Record Today</a></li>
                 <li><a href="allrecords.jsp">Record History</a></li>
@@ -84,6 +85,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
 </nav>
 <div id="wrapper">
     <h1>${fn:escapeXml(albumName)}</h1>
+    
     <h2 align="center"> 
     <font size="4px"> <a href="addphotos.jsp?albumName=${fn:escapeXml(albumName)}">Add photos </a>&nbsp;&nbsp;<a href="deletephoto.jsp?albumName=${fn:escapeXml(albumName)}"> Delete photos </a>
     </font>
@@ -98,6 +100,10 @@ Key parentKey = KeyFactory.createKey("User", userName);
   <!--    <ul class="events">
       <li><h3>Example 4 callback events</h3></li>
     </ul> -->
+    <h2 align="center"> 
+    <font size="4px"> <a href="album.jsp">Back to Albums </a>
+    </font>
+	</h2>
     </div>
      
  <script type="text/javascript">
@@ -132,6 +138,8 @@ Key parentKey = KeyFactory.createKey("User", userName);
 </script>
 
 <script src="/js/responsiveslides.min.js"></script>
-    
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+<!-- <script src="/js/bootstrap.min.js"></script> -->
+      
     </body>
 </html>

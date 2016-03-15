@@ -72,7 +72,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
             <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
-            <li class="dropdown" class="active"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menue <span class="caret"></span></a>
+            <li class="dropdown" class="active"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="newrecord.jsp">Record Today</a></li>
                 <li><a href="allrecords.jsp">Record History</a></li>
@@ -125,7 +125,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
 					    + item.notes
 					    + '</p> <form action="/context/album/deletealbum?albumName='
 					    + item.albumName
-					    +'" method="post"> <input class="btn btn-info" type="submit" style="display: block; margin: 0 auto;" value="delete"></form>'
+					    +'" method="post"> <input class="btn btn-primary btn-sm" type="submit" style="display: block; margin: 0 auto;" value="delete"></form>'
 					    + '</div>'
 						);
 			});

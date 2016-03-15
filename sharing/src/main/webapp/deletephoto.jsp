@@ -32,7 +32,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Insert title here</title>
+<title></title>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,7 +83,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
             <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
-            <li class="dropdown" class="active"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menue <span class="caret"></span></a>
+            <li class="dropdown" class="active"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="newrecord.jsp">Record Today</a></li>
                 <li><a href="allrecords.jsp">Record History</a></li>
@@ -102,6 +102,14 @@ Key parentKey = KeyFactory.createKey("User", userName);
            </div>
       </div>
 </nav>
+
+<div class = "container">
+<div class="jumbotron">
+<h2 > 
+    <font size="4px"> <a href="gallery.jsp?albumName=${fn:escapeXml(albumName)}">Back to Album Gallery </a>
+    </font>
+</h2>
+</div>
 
  <script type="text/javascript">
 	$(document).ready(function(){
@@ -124,9 +132,13 @@ Key parentKey = KeyFactory.createKey("User", userName);
 	});
 		
  </script>
+ 
 <div id="list">
 <!-- <h1>hello</h2> -->
+
+
 </div>
-<script src="/js/responsiveslides.min.js"></script>
+</div>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

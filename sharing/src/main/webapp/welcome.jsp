@@ -30,7 +30,8 @@
    
     <link rel="stylesheet" href="stylesheets/css/bootstrap.min.css" >
     <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    --> </head>
+    --> 
+    </head>
 
   <body>
  <%
@@ -80,7 +81,8 @@
         <h1>Keep Record</h1>
         <p>This app is a easy diary to record your daily life including diet, exercise, weight.</p>
         <p>My Album offers you a convenient management of your daily photos.</p>
-        <p>Please sign in for more detail
+        <p>Please drop down menu for detail</p>
+        <p>Please sign in </p>
          <a class="btn btn-lg btn-primary" href="<%=userService.createLoginURL(request.getRequestURI())%>" role="button">Sign In</a>
        </p>
       </div>
@@ -109,7 +111,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
                         <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menue <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="newrecord.jsp">Record Today</a></li>
                 <li><a href="allrecords.jsp">Record History</a></li>
@@ -134,8 +136,10 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Keep Record</h1>
-        <p>This app is health diary to record daily diet, exerise, weight.</p>
-        <p>It also offers you convenience to upload and manage your daily photos.</p>
+        <p>This app is a easy diary to record your daily life including diet, exercise, weight.</p>
+        <p>My Album offers you a convenient management of your daily photos.</p>
+        <p>Please drop down menu for detail</p>
+        
       </div>
 
     </div> <!-- /container -->

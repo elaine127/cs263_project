@@ -122,7 +122,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
                         <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menue <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="newrecord.jsp">Record Today</a></li>
                 <li><a href="allrecords.jsp">Record History</a></li>
@@ -157,6 +157,19 @@
 				<button type="submit" class="btn btn-primary btn-sm">Continue to record details</button>
 			</fieldset>
 		</form>
+		<script>
+			$("#submitform").submit(function(event){
+					var date = document.forms["form1"]["date"].value;
+					event.preventDefault();
+					$.getJSON("context/checkform/record/"+date, function(data){
+						if(data.result == "true"){
+							alert("Record already exists! Go to My Record to update or Create new record with another date");
+						}else{
+							$('#submitform').unbind('submit').submit();
+						}
+					});
+			});
+		</script>
 	</div>
 </div>
       </div>
