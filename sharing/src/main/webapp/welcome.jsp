@@ -18,7 +18,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Fixed Top Navbar Example for Bootstrap</title>
+    <title>Welcome Health Diary</title>
 
     <!-- Bootstrap core CSS --><!-- 
     <link rel="stylesheet" type="text/css" href="/stylesheets/css/demo.css" />
@@ -77,10 +77,10 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Keep record</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
+        <h1>Keep Record</h1>
+        <p>This app is a easy diary to record your daily life including diet, exercise, weight.</p>
+        <p>My Album offers you a convenient management of your daily photos.</p>
+        <p>Please sign in for more detail
          <a class="btn btn-lg btn-primary" href="<%=userService.createLoginURL(request.getRequestURI())%>" role="button">Sign In</a>
        </p>
       </div>
