@@ -88,10 +88,7 @@ Key parentKey = KeyFactory.createKey("User", userName);
                 <li><a href="newrecord.jsp">Record Today</a></li>
                 <li><a href="allrecords.jsp">Record History</a></li>
                 <li><a href="album.jsp">My Album</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
+            
               </ul>
             </li>
           </ul>
