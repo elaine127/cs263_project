@@ -35,17 +35,20 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%> --%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html lang="en">
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ -->    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
@@ -61,7 +64,20 @@
 		#formpage {clear ="both";}
 	</style>
 
-<title>Record Food</title>
+<title></title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script type="text/javascript">
+	function initialize1() {
+		var input1 = document.getElementById('pac-input1');
+		var autocomplete1 = new google.maps.places.Autocomplete(input1);
+	}
+	google.maps.event.addDomListener(window, 'load', initialize1);
+    
+</script>
+
 </head>
 <body>
 	<%
@@ -134,6 +150,14 @@
  	<div class="leftbody">
  	<h3>Please enter your food details:</h3>
     <fieldset class="col-xs-6" style="margin-left: 8px; margin-right: 2px">
+     			<form id = "submitform" name ="form" action="/context/search/food?date=${fn:escapeXml(date)}" method ="post">
+     			<p>Find something to eat?</p>
+     			<p>
+     				<input id="pac-input1" class="controls" type="text" placeholder="Please enter a city" autocomplete="on" name="searchCity">
+     			    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+     			</p>
+     			</form>
+     			
 				<form id ="submitform1" name="form1" action="/context/enqueue/newfood/?date=${fn:escapeXml(date)}" method="post">
 					<div class="row">
 					<div class="col-xs-12">

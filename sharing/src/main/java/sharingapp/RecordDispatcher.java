@@ -55,6 +55,12 @@ public class RecordDispatcher {
 		String date = request.getParameter("date");
 		Queue queue = QueueFactory.getDefaultQueue();
 		queue.add(withUrl("/context/foodworker/createfood").param("breakfast", breakfast).param("lunch", lunch).param("dinner", dinner).param("date", date).param("userName", userName.toString()));
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Response.temporaryRedirect(new URI("/food.jsp?date=" + date)).build();
 	}
 	
@@ -67,6 +73,12 @@ public class RecordDispatcher {
 		String date = request.getParameter("date");
 		Queue queue = QueueFactory.getDefaultQueue();
 		queue.add(withUrl("/context/exeriseworker/createexerise").param("exerise", exerise).param("date", date).param("userName", userName.toString()));
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Response.temporaryRedirect(new URI("/exerise.jsp?date=" + date)).build();
 		
 	}
@@ -89,6 +101,12 @@ public class RecordDispatcher {
 					.param("weight", weight)
 					.param("date", date)
 					);
+		}
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return Response.temporaryRedirect(new URI("/weight.jsp?date=" + date)).build();
 		

@@ -16,7 +16,9 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.appengine.api.blobstore.BlobKey;
@@ -79,7 +81,7 @@ public class AlbumDispatcher {
 	}
 	@POST
 	@Path("/deletephoto")
-	public void deletePhoto(@Context HttpServletRequest request,
+	public Response deletePhoto(@Context HttpServletRequest request,
 			@Context HttpServletResponse response) throws Exception{
 		UserService userService = UserServiceFactory.getUserService();
 		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
@@ -100,7 +102,8 @@ public class AlbumDispatcher {
 		album.setProperty("list", list);
 		datastore.put(album);
 		
-		blobstoreService.delete(k);		
+		blobstoreService.delete(k);	
+		return Response.temporaryRedirect(new URI("/deletephoto.jsp?albumName="+albumName)).build();
 	}
 	
 	@POST
@@ -152,7 +155,7 @@ public class AlbumDispatcher {
 
 	@GET
 	@Path("/allalbums")
-
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<AlbumData> getAllAlbums() throws Exception {
 		
 		UserService userService = UserServiceFactory.getUserService();

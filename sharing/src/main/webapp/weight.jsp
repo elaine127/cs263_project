@@ -53,6 +53,11 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ 
+    
     <link type="text/css" rel="stylesheet" href="/stylesheets/css/bootstrap.min.css" >
 
 	<style>
@@ -280,7 +285,17 @@
 	</div>
 	</div>
 </div>
-
+<script>
+	$("#submitform1").submit(function(event){
+			var data = document.forms["form1"]["weight"].value;
+			event.preventDefault();
+			if(data == null || data == ""){
+				alert("weight can not be empty!");
+			}else{
+				$("#submitform1").unbind('submit').submit();
+			}
+	});
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
  <script src="/js/bootstrap.min.js"></script>
 </body>

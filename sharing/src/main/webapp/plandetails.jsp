@@ -139,6 +139,34 @@
 				
 			}
 	 %>
+	 <% 
+	 if(syncCache.get(exeriseKey) != null ){
+			Entity e = (Entity)syncCache.get(exeriseKey);
+			String exerise = (String)e.getProperty("exerise");
+			pageContext.setAttribute("exerise", exerise);
+	 }else{
+		    Query q2 = new Query("exerise").setAncestor(dateKey);
+			PreparedQuery pq2 = datastore.prepare(q2);
+			for(Entity result: pq2.asIterable()){
+				String exerise = (String)result.getProperty("exerise");
+				pageContext.setAttribute("exerise", exerise);
+				}
+	 }
+	 if(syncCache.get(weightKey) != null ){
+			Entity e = (Entity)syncCache.get(weightKey);
+			String weight = (String)e.getProperty("weight");
+			pageContext.setAttribute("weight", weight);
+	}else{
+		    Query q1 = new Query("weight").setAncestor(dateKey);
+			PreparedQuery pq1 = datastore.prepare(q1);
+			for(Entity result: pq1.asIterable()){
+				String weight = (String)result.getProperty("weight");
+				pageContext.setAttribute("weight", weight);
+			}	
+			}
+	
+     %>
+     
 	<div class = "row">
 	<div class = "col-xs-6">
  	<div class="leftbody">
@@ -168,35 +196,9 @@
   		</div>		
 	 </div>
 	 </div>
-	 <% 
-	 if(syncCache.get(exeriseKey) != null ){
-			Entity e = (Entity)syncCache.get(exeriseKey);
-			String exerise = (String)e.getProperty("exerise");
-			pageContext.setAttribute("exerise", exerise);
-	 }else{
-		    Query q2 = new Query("exerise").setAncestor(dateKey);
-			PreparedQuery pq2 = datastore.prepare(q2);
-			for(Entity result: pq2.asIterable()){
-				String exerise = (String)result.getProperty("exerise");
-				pageContext.setAttribute("exerise", exerise);
-				}
-	 }
-	 if(syncCache.get(weightKey) != null ){
-			Entity e = (Entity)syncCache.get(weightKey);
-			String weight = (String)e.getProperty("weight");
-			pageContext.setAttribute("weight", weight);
-	}else{
-		    Query q1 = new Query("weight").setAncestor(dateKey);
-			PreparedQuery pq1 = datastore.prepare(q1);
-			for(Entity result: pq1.asIterable()){
-				String weight = (String)result.getProperty("weight");
-				pageContext.setAttribute("weight", weight);
-			}	
-			}
-	
-     %>
+	 
     <div class ="col-xs-6">
-	<div class="leftbody">
+	<div class="rightbody">
 	
 	
 	<li><a href="food.jsp?date=${fn:escapeXml(date)}">update food</a></li>
