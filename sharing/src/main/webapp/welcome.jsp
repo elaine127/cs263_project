@@ -63,7 +63,7 @@
               <ul class="dropdown-menu">
                 <li><a href="<%=userService.createLoginURL(request.getRequestURI())%>">Record Today</a></li>
                 <li><a href="<%=userService.createLoginURL(request.getRequestURI())%>">Record History</a></li>
-                <li><a href="<%=userService.createLoginURL(request.getRequestURI())%>">My plan</a></li>
+                <li><a href="<%=userService.createLoginURL(request.getRequestURI())%>">My album</a></li>
               </ul>
             </li>
           </ul>
