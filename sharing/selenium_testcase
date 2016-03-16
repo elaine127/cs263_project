@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="https://github.com/" />
+<title>selenium_testcase</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">selenium_testcase</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/SeleniumHQ/selenium/wiki/SeIDEReleaseNotes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Business</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Explore</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign In</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=Passwd</td>
+	<td>Heatheryy1992~</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=signIn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Menu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Record Today</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=datepicker</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Record already exists! Go to My Record to update or Create new record with another date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=datepicker</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pac-input1</td>
+	<td>san</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='gmap_canvas']/div/div/div[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[contains(@src,'https://maps.gstatic.com/mapfiles/api-3/images/mapcnt6.png')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[contains(@src,'https://maps.gstatic.com/mapfiles/api-3/images/mapcnt6.png')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div[title=&quot;Zoom out&quot;] &gt; div &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div[title=&quot;Zoom out&quot;] &gt; div &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div[title=&quot;Zoom out&quot;] &gt; div &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='gmap_canvas']/div/div/div[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[contains(@src,'https://maps.gstatic.com/mapfiles/api-3/images/mapcnt6.png')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to Record</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=breakfast</td>
+	<td>egg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=lunch</td>
+	<td>lunch</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=dinner</td>
+	<td>apple</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//button[@type='submit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Exerise</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=exerise</td>
+	<td>running</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Weight</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=weight</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=notice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Menu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Record History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=03/17/2016</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=breakfast</td>
+	<td>no egg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=lunch</td>
+	<td>no lunch</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=dinner</td>
+	<td>no apple</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//button[@type='submit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Menu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Record History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Menu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=My Album</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add New Album</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=albumName</td>
+	<td>a1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=notes</td>
+	<td>n1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=myFile</td>
+	<td>/Users/elaine/Downloads/2035933009.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add photos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=myFile</td>
+	<td>/Users/elaine/Downloads/1786669253.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete photos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@value='delete'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to Album Gallery</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to Albums</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add New Album</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=albumName</td>
+	<td>a2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=notes</td>
+	<td>note2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Menu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=newlink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//div[@id='photo']/a/img)[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add photos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=myFile</td>
+	<td>/Users/elaine/Downloads/873614323.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

@@ -33,7 +33,7 @@ public class RecordDispatcher {
 	@POST
 	@Path("/newrecord")
 	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Consumes("application/x-www-form-urlencoded")
+//	@Consumes("application/x-www-form-urlencoded")
 //	@FormParam("planName") String planName,,
 	public Response newRecord(@FormParam("date") String dt, @Context HttpServletResponse response) throws IOException, URISyntaxException
 			 {

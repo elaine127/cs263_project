@@ -1,7 +1,7 @@
 package sharingapp;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.*;
-
+@XmlRootElement
 public class ImageData{
 	private String albumName;
 	private String imageUrl;

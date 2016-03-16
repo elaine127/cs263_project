@@ -198,10 +198,8 @@
 	<div class="rightbody">
 	
 	
-	<li><a href="food.jsp?date=${fn:escapeXml(date)}">update food</a></li>
-	 <li><a href="exerise.jsp?date=${fn:escapeXml(date)}">update exerise</a></li>
-	 <li><a href="weight.jsp?date=${fn:escapeXml(date)}">update weight</a></li>
-
+	<li><a href="food.jsp?date=${fn:escapeXml(date)}">update </a></li>
+	
    </div>
    </div>
    </div>

@@ -1,0 +1,4 @@
+
+curl -X GET -H "Cookie:dev_appserver_login=test@example.com:false:185804764220139124118" http://localhost:8080/context/album/allalbums
+
+curl -X GET -H "Cookie:dev_appserver_login=test@example.com:false:185804764220139124118" http://localhost:8080/context/album/allImages?albumName="a1"
